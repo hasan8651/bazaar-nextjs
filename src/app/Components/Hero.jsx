@@ -1,5 +1,6 @@
 "use client";
 import {motion, AnimatePresence } from 'framer-motion';
+import { BadgeCheck, ShieldCheck, Truck } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react'
 
@@ -55,7 +56,7 @@ export default function Hero() {
           >
             <Image
               src={currentSlide.image}
-              alt="Hero Background"
+              alt="HeroSlides"
               fill
               priority={currentIndex === 0}
               className="object-cover"
@@ -87,14 +88,14 @@ export default function Hero() {
       </div>
 
       {/* Gradient overlay for read text */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-900/40 to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-b from-indigo-900/70 via-blue-900/40 to-black/70" />
 
       {/* Foreground content */}
       <div className="relative z-10 max-w-7xl mx-auto h-full px-4 py-6 md:py-4 flex items-center">
         <div className="w-full md:w-2/3 lg:w-1/2">
           {/* Campaign (changes per slide) */}
-          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-blue-200 backdrop-blur-sm border border-blue-500/20">
-            <span className="mr-2 h-1.5 w-1.5 rounded-full bg-blue-400" />
+          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-indigo-200 backdrop-blur-sm border border-indigo-500/20">
+            <span className="mr-2 h-1.5 w-1.5 rounded-full bg-indigo-400" />
             <span>{currentSlide.campaign}</span>
           </div>
 
@@ -110,19 +111,19 @@ export default function Hero() {
 
           {/* CTA need update */}
          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-3/7 md:w-4/7">
-          <button className="inline-flex w-full items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-blue-600 cursor-pointer">
+          <button className="inline-flex w-full items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
             Shop Now
             </button>
-            <button className="inline-flex w-full items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-blue-600 cursor-pointer">
+            <button className="inline-flex w-full items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
 View Best Sellers
 </button> 
 </div>
 
           {/* Trust badges */}
           <div className="mt-6 flex md:flex-row flex-col gap-4 text-sm ">
-            <span>🔒 Secure checkout</span>
-            <span>📦 Fast delivery across Bangladesh</span>
-            <span>✅ Safety-tested products only</span>
+            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-600" /> Secure checkout</div>
+            <div className="flex items-center gap-2"> <Truck className="w-5 h-5 text-blue-600" /> Fast delivery across Bangladesh</div>
+            <div className="flex items-center gap-2"><BadgeCheck className="w-5 h-5 text-orange-500" /> Safety-tested products only</div>
           </div>
         </div>
       </div>
