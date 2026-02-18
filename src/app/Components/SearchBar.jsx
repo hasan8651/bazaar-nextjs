@@ -8,7 +8,7 @@ export default function SearchBar() {
     <div className="relative w-full">
       <input
         type="text"
-        placeholder="Search products..."
+        placeholder="Search Bazarr products..."
         className="w-full rounded-full bg-gray-100 pl-11 pr-5 py-3 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:border-gray-400 transition-all"
       />
       <Search
