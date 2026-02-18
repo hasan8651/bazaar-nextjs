@@ -32,7 +32,7 @@ const IMAGE_DURATION = 12; // seconds
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto‑change slides
+  // Auto‑change slides OK
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -44,7 +44,7 @@ export default function Hero() {
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="relative w-full h-[80vh] text-white overflow-hidden">
+    <section className="relative w-full h-[80vh] overflow-hidden">
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -66,7 +66,7 @@ export default function Hero() {
               className="object-cover"
             />
 
-            {/* Shine effect */}
+            {/* Shine effect OK */}
             <motion.div
               className="absolute inset-0 pointer-events-none"
               initial={{ x: "-200%" }}
@@ -91,7 +91,7 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Gradient overlay for read text */}
+      {/* Gradient overlay for read text OK */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/70 via-blue-900/40 to-black/70" />
 
       {/* Foreground content */}
@@ -105,17 +105,17 @@ export default function Hero() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="mt-12 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Development Only.
+          <h1 className="mt-12 text-4xl font-bold text-white leading-tight">
+            Your Daily Essentials, Just a Click Away.
           </h1>
 
           {/* Subheading */}
-          <p className="mt-4 text-base md:text-xl text-primary max-w-xl">
-            Development Only.
+          <p className="mt-4 text-base md:text-xl text-white max-w-xl">
+            Smart Shopping, Superior Style, Seamless Service.
           </p>
 
           {/* CTA need update */}
-          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3">
+          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/2">
             <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
               Shop Now
             </button>
@@ -124,20 +124,17 @@ export default function Hero() {
             </button>
           </div>
         </div>
-        {/* Trust badges */}
-        <div className="absolute bottom-2 left-4 right-4 z-20">
+        {/* Trust badges OK */}
+        <div className="absolute bottom-2 left-4 right-4 text-gray-400 z-20">
           <div className="mt-6 flex flex-col md:flex-row gap-2 md:gap-6 text-sm font-medium opacity-90">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-green-600" /> Secure checkout
             </div>
             <div className="flex items-center gap-2">
-              {" "}
-              <Truck className="w-5 h-5 text-blue-600" /> Fast delivery across
-              Bangladesh
+              <Truck className="w-5 h-5 text-blue-600" /> Fast delivery across Bangladesh
             </div>
             <div className="flex items-center gap-2">
-              <BadgeCheck className="w-5 h-5 text-orange-500" /> Safety-tested
-              products only
+              <BadgeCheck className="w-5 h-5 text-orange-500" /> Safety-tested products only
             </div>
           </div>
         </div>
