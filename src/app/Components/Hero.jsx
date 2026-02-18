@@ -6,19 +6,19 @@ import { useEffect, useState } from 'react'
 
 const slides = [
   {
-    image: "https://i.ibb.co/PZpsxL0J/slide1.webp",
+    image: "https://i.ibb.co/dwzd0vW8/slide1.webp",
     campaign: "Wear the Trend. Be the Trend. Upgrade Your Style with Our New Arrivals.",
   },
   {
-    image: "https://i.ibb.co/PZpsxL0J/slide1.webp",
+    image: "https://i.ibb.co/cKLV5xwB/slide2.webp",
     campaign: "Mega Tech Sale: Power Up for Less! Premium Tech. Unbeatable Prices.",
   },
   {
-    image: "https://i.ibb.co/PZpsxL0J/slide1.webp",
+    image: "https://i.ibb.co/xKK2X8wZ/slide3.webp",
     campaign: "Farm Fresh Goodness, Delivered to Your Doorstep. Eat Fresh, Live Healthy.",
   },
   {
-    image: "https://i.ibb.co/PZpsxL0J/slide1.webp",
+    image: "https://i.ibb.co/R422PVq2/slide4.webp",
     campaign: "Premium Furniture. Affordable Prices. Where Comfort Meets Style.",
   },
 ];
@@ -40,7 +40,7 @@ export default function Hero() {
   const currentSlide = slides[currentIndex];
 
   return (
-   <section className="relative w-full  text-white overflow-hidden">
+   <section className="relative w-full h-[80vh] text-white overflow-hidden">
        <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -88,13 +88,13 @@ export default function Hero() {
       </div>
 
       {/* Gradient overlay for read text */}
-      <div className="absolute inset-0 bg-linear-to-b from-indigo-900/70 via-blue-900/40 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/70 via-blue-900/40 to-black/70" />
 
       {/* Foreground content */}
       <div className="relative z-10 max-w-7xl mx-auto h-full px-4 py-6 md:py-4 flex items-center">
         <div className="w-full md:w-2/3 lg:w-1/2">
           {/* Campaign (changes per slide) */}
-          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-indigo-200 backdrop-blur-sm border border-indigo-500/20">
+          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-medium text-indigo-200 backdrop-blur-sm border border-indigo-500/20">
             <span className="mr-2 h-1.5 w-1.5 rounded-full bg-indigo-400" />
             <span>{currentSlide.campaign}</span>
           </div>
@@ -110,23 +110,24 @@ export default function Hero() {
           </p>
 
           {/* CTA need update */}
-         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-3/7 md:w-4/7">
-          <button className="inline-flex w-full items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
+         <div className="mt-8 grid grid-cols-2 gap-4 w-2/3">
+          <button className="inline-flex items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
             Shop Now
             </button>
-            <button className="inline-flex w-full items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
+            <button className="inline-flex items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
 View Best Sellers
 </button> 
 </div>
-
+ </div>
           {/* Trust badges */}
-          <div className="mt-6 flex md:flex-row flex-col gap-4 text-sm ">
+            <div className="absolute bottom-10 left-4 right-4 z-20">
+          <div className="mt-6 flex flex-col md:flex-row gap-2 md:gap-6 text-sm font-medium opacity-90">
             <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-600" /> Secure checkout</div>
             <div className="flex items-center gap-2"> <Truck className="w-5 h-5 text-blue-600" /> Fast delivery across Bangladesh</div>
             <div className="flex items-center gap-2"><BadgeCheck className="w-5 h-5 text-orange-500" /> Safety-tested products only</div>
           </div>
         </div>
-      </div>
+       </div>
     </section>
   );
 }
