@@ -94,7 +94,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto h-full px-4 py-6 md:py-4 flex items-center">
         <div className="w-full md:w-2/3 lg:w-1/2">
           {/* Campaign (changes per slide) */}
-          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-medium text-indigo-200 backdrop-blur-sm border border-indigo-500/20">
+          <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-medium text-(--accent) backdrop-blur-sm border border-indigo-500/20">
             <span className="mr-2 h-1.5 w-1.5 rounded-full bg-indigo-400" />
             <span>{currentSlide.campaign}</span>
           </div>
@@ -105,16 +105,16 @@ export default function Hero() {
           </h1>
 
           {/* Subheading */}
-          <p className="mt-4 text-base md:text-xl text-gray-200 max-w-xl">
+          <p className="mt-4 text-base md:text-xl text-primary max-w-xl">
              Development Only.
           </p>
 
           {/* CTA need update */}
          <div className="mt-8 grid grid-cols-2 gap-4 w-2/3">
-          <button className="inline-flex items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
+          <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
             Shop Now
             </button>
-            <button className="inline-flex items-center justify-center rounded-full border border-indigo-500 bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-indigo-600 cursor-pointer">
+            <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
 View Best Sellers
 </button> 
 </div>
