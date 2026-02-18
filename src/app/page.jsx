@@ -1,3 +1,4 @@
+import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 
 export default function Home() {
@@ -12,6 +13,10 @@ export default function Home() {
         </h1>
         <h1 className="mt-4 text-2xl text-blue-500">Development Branch</h1>
       </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </main>
+    
   );
 }
