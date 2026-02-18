@@ -1,6 +1,5 @@
 "use client";
 
-
 export default function NewsletterForm() {
   return (
     <form className="flex flex-col space-y-3" onSubmit={(e) => e.preventDefault()}>
