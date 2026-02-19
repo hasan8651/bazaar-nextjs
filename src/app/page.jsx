@@ -1,4 +1,4 @@
-
+import RegisterPage from './auth/Register/RegisterPage';
 import Navbar from './Components/Navbar';
 export default function Home() {
   return (
@@ -10,7 +10,6 @@ export default function Home() {
         </h1>
         <h1 className="mt-4 text-2xl text-blue-500">Development Branch</h1>
       </div>
-      
     </main>
   );
 }
