@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ShoppingBag, ArrowRight, Check } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, User, Image } from "lucide-react";
 
 export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +70,7 @@ export default function RegisterPage() {
                                     Name
                                 </label>
                                 <div className="relative">
-                                    <Mail
+                                    <User
                                         size={16}
                                         className="absolute left-3.5 top-1/2 -translate-y-1/2"
                                         style={{ color: "#64748B" }}
@@ -97,7 +97,7 @@ export default function RegisterPage() {
                                     Photo
                                 </label>
                                 <div className="relative">
-                                    <Mail
+                                    <Image
                                         size={16}
                                         className="absolute left-3.5 top-1/2 -translate-y-1/2"
                                         style={{ color: "#64748B" }}
