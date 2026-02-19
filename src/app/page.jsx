@@ -1,14 +1,11 @@
 import Footer from './Components/Footer';
 import Hero from './Components/Hero';
 import Navbar from './Components/Navbar';
-
 export default function Home() {
   return (
     <main>
-     
       <Navbar /> 
       <Hero/>
-
       <div className="flex flex-col min-h-[80vh] items-center justify-center">
         <h1 className="text-6xl font-bold text-orange-500">
           Hello Bazaar!
@@ -18,6 +15,7 @@ export default function Home() {
       <div>
         <Footer/>
       </div>
+ 
     </main>
     
     
