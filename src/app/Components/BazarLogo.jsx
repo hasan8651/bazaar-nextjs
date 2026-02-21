@@ -1,11 +1,7 @@
 export default function BazaarLogo() {
   return (
-    <h1 className="
-      text-4xl font-extrabold select-none 
-      text-neutral-900 dark:text-black
-      tracking-tight
-    ">
-      <span className="text-indigo-600">Baz</span>aar
-    </h1>
+   <span className="text-4xl md:text-5xl font-black text-[var(--primary)] tracking-tight">
+                  Ba<span className="text-[var(--secondary)]">zaar</span>
+                </span>
   );
 }
