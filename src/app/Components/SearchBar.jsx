@@ -1,20 +1,50 @@
-
 "use client";
 
-import { Search } from 'lucide-react';
+import { Search } from "lucide-react";
+import { useState } from "react";
 
 export default function SearchBar() {
+  const [selected, setSelected] = useState("All");
+
+  const categories = [
+    "All",
+    "Electronics",
+    "Fashion",
+    "Grocery",
+    "Home & Living",
+    "Beauty",
+    "Mobile",
+  ];
+
   return (
-    <div className="relative w-full">
+    <div className="w-full flex items-center bg-white border border-gray-300 rounded-full shadow-sm overflow-hidden">
+
+      {/* Category */}
+      <select
+        value={selected}
+        onChange={(e) => setSelected(e.target.value)}
+        className="hidden md:flex items-center h-12 bg-gray-50 px-5 text-sm border-r border-gray-300 outline-none cursor-pointer hover:bg-gray-100 transition"
+      >
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+
+      {/* Input */}
       <input
         type="text"
-        placeholder="Search products..."
-        className="w-full rounded-full bg-gray-100 pl-11 pr-5 py-3 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:border-gray-400 transition-all"
+        placeholder="Search for products..."
+        className="flex-1 px-5 text-sm h-12 bg-white outline-none"
       />
-      <Search
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"
-        size={20}
-      />
+
+      {/* Search button */}
+      <button className="h-12 w-14 bg-blue-600 flex justify-center items-center hover:bg-blue-700 transition text-white"
+      style={{backgroundColor: "var(--secondary"}}
+      >
+        <Search size={20} />
+      </button>
     </div>
   );
 }
