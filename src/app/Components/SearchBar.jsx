@@ -17,31 +17,47 @@ export default function SearchBar() {
   ];
 
   return (
-    <div className="w-full flex items-center bg-white border border-gray-300 rounded-full shadow-sm overflow-hidden">
+    <div 
+      className="w-full flex items-center border rounded-full shadow-sm overflow-hidden transition-all duration-300"
+      style={{ 
+        backgroundColor: "var(--background)", 
+        borderColor: "var(--border)" 
+      }}
+    >
 
-      {/* Category */}
+      {/* Category Dropdown */}
       <select
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
-        className="hidden md:flex items-center h-12 bg-gray-50 px-5 text-sm border-r border-gray-300 outline-none cursor-pointer hover:bg-gray-100 transition"
+        className="hidden md:flex items-center h-12 px-5 text-sm border-r outline-none cursor-pointer transition"
+        style={{ 
+          backgroundColor: "var(--surface)", 
+          borderColor: "var(--border)",
+          color: "var(--text-primary)"
+        }}
       >
         {categories.map((cat) => (
-          <option key={cat} value={cat}>
+          <option key={cat} value={cat} className="bg-white dark:bg-[#1e293b]">
             {cat}
           </option>
         ))}
       </select>
 
-      {/* Input */}
+      {/* Input Field */}
       <input
         type="text"
         placeholder="Search for products..."
-        className="flex-1 px-5 text-sm h-12 bg-white outline-none"
+        className="flex-1 px-5 text-sm h-12 outline-none transition-all"
+        style={{ 
+          backgroundColor: "var(--background)", 
+          color: "var(--text-primary)"
+        }}
       />
 
       {/* Search button */}
-      <button className="h-12 w-14 bg-blue-600 flex justify-center items-center hover:bg-blue-700 transition text-white"
-      style={{backgroundColor: "var(--secondary"}}
+      <button 
+        className="h-12 w-14 flex justify-center items-center hover:opacity-90 transition text-white"
+        style={{ backgroundColor: "var(--secondary)" }}
       >
         <Search size={20} />
       </button>
