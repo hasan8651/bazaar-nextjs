@@ -24,7 +24,8 @@ export default function Navbar() {
           <MobileMenu />
           
           <div className="flex-shrink-0">
-            <BazaarLogo />
+            <BazaarLogo width={160} height={80} />
+            
           </div>
 
           <div className="hidden md:flex flex-1 max-w-2xl mx-8">

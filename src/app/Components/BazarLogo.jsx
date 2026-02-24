@@ -1,7 +1,19 @@
-export default function BazaarLogo() {
+import Image from "next/image";
+import Link from "next/link";
+
+const BazarLogo = ({ width = 150, height = 50 }) => {
   return (
-    <span className="text-4xl md:text-5xl font-black tracking-tight" style={{ color: "var(--primary)" }}>
-      Ba<span style={{ color: "var(--secondary)" }}>zaar</span>
-    </span>
+    <Link href="/" className="flex items-center">
+      <Image
+        src="/logo.png"
+        alt="Bazaar Logo"
+        width={width}
+        height={height}
+        priority // quick loading logo on Navbar
+        className="object-contain"
+      />
+    </Link>
   );
-}
+};
+
+export default BazarLogo;

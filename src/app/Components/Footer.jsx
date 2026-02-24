@@ -23,7 +23,7 @@ export default function Footer() {
                     {/* Company Info */}
                     <div className="space-y-6">
                         <div className="flex items-center">
-                            <BazaarLogo />
+                            <BazaarLogo width={160} height={80} />
                         </div>
                         <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-secondary)" }}>
                             Bazaar is your premier destination for curated quality and exceptional style. 

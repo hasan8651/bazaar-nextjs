@@ -96,7 +96,7 @@ export default function Hero() {
 
       {/* Foreground content */}
       <div className="relative z-10 max-w-7xl mx-auto h-full px-4 pt-6">
-        <div className="w-full md:w-2/3">
+        <div className="w-full">
           {/* Campaign (changes per slide) */}
           <div className="w-fit rounded-full bg-white/10 px-8 py-1 md:text-3xl font-medium md:font-extrabold text-(--accent) backdrop-blur-sm border border-indigo-500/20">
             <span className="whitespace-pre-line leading-tight">
@@ -115,12 +115,12 @@ export default function Hero() {
           </p>
 
           {/* CTA need update */}
-          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/2">
+          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/3">
             <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
-              Shop Now
+              Bazaar Now
             </button>
             <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
-              View Best Sellers
+              Be a Seller
             </button>
           </div>
         </div>
