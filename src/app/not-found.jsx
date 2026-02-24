@@ -1,5 +1,7 @@
 import Link from 'next/link';
+
 import { Home, ArrowLeft } from 'lucide-react';
+import BazaarLogo from './Components/BazaarLogo';
 
 export default function NotFound() {
   return (
@@ -17,10 +19,8 @@ export default function NotFound() {
           <div className="absolute inset-0 flex flex-col items-center justify-center">
              {/* Bazaar Name with Accent line */}
              <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-5xl font-black text-[var(--primary)] tracking-tight">
-                  Ba<span className="text-[var(--secondary)]">zaar</span>
-                </span>
-                <div className="h-1 w-12 bg-[var(--accent)] rounded-full mt-1 animate-bounce" />
+                   <BazaarLogo width={240} height={120} />
+                
              </div>
           </div>
         </div>

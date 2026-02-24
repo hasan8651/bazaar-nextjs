@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const BazarLogo = ({ width = 150, height = 50 }) => {
+const BazaarLogo = ({ width = 150, height = 50 }) => {
   return (
     <Link href="/" className="flex items-center">
       <Image
@@ -16,4 +16,4 @@ const BazarLogo = ({ width = 150, height = 50 }) => {
   );
 };
 
-export default BazarLogo;
+export default BazaarLogo;

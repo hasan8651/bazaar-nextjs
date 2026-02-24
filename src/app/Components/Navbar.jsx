@@ -1,5 +1,5 @@
 import { Heart, ShoppingCart } from "lucide-react";
-import BazaarLogo from "./BazarLogo";
+import BazaarLogo from "./BazaarLogo";
 import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
 import UserMenu from "./UserMenu";
@@ -24,7 +24,7 @@ export default function Navbar() {
           <MobileMenu />
           
           <div className="flex-shrink-0">
-            <BazaarLogo width={160} height={80} />
+            <BazaarLogo width={180} height={80} />
             
           </div>
 
