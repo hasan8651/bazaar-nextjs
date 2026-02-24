@@ -1,17 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const BazaarLogo = ({ width = 150, height = 50 }) => {
+const BazaarLogo = () => {
   return (
     <Link href="/" className="flex items-center">
-      <Image
-        src="/logo.png"
-        alt="Bazaar Logo"
-        width={width}
-        height={height}
-        priority // quick loading logo on Navbar
-        className="object-contain"
-      />
+      <div className="relative w-[100px] h-[35px] md:w-[150px] md:h-[50px]">
+        <Image
+          src="/logo.png"
+          alt="Bazaar Logo"
+          fill 
+          priority
+          className="object-contain"
+        />
+      </div>
     </Link>
   );
 };
