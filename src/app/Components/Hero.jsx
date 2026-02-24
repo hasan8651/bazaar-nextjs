@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { BadgeCheck, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const slides = [
@@ -116,12 +117,12 @@ export default function Hero() {
 
           {/* CTA need update */}
           <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/3">
-            <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+            <Link href="/login" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
               Bazaar Now
-            </button>
-            <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+            </Link>
+            <Link href="/register" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
               Be a Seller
-            </button>
+            </Link>
           </div>
         </div>
         {/* Trust badges OK */}
