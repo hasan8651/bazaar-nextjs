@@ -1,3 +1,5 @@
+"use client"; 
+import { useSession } from "next-auth/react";
 import { Heart, ShoppingCart } from "lucide-react";
 import BazaarLogo from "./BazaarLogo";
 import MobileMenu from "./MobileMenu";
@@ -6,9 +8,10 @@ import UserMenu from "./UserMenu";
 
 export default function Navbar() {
 
-  const dummyUser = null;
+  const { data: session } = useSession();
+  const user = session?.user; 
+
   return (
-   
     <nav className="sticky top-0 z-50 shadow-md py-4 transition-all duration-300 border-b"
       style={{ 
         backgroundColor: "var(--background)", 
@@ -21,16 +24,15 @@ export default function Navbar() {
           
           <div className="flex-shrink-0">
             <BazaarLogo width={180} height={80} />
-            
           </div>
 
           <div className="hidden md:flex flex-1 max-w-2xl mx-8">
             <SearchBar />
           </div>
 
-          
           <div className="flex items-center gap-5 md:gap-8" style={{ color: "var(--text-primary)" }}>
-            <UserMenu user={dummyUser} />
+            {/* pass user data*/}
+            <UserMenu user={user} />
 
             <button className="relative flex flex-col items-center hover:opacity-70 transition">
               <Heart size={22} />
@@ -50,7 +52,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE ONLY SEARCH BAR */}
         <div className="md:hidden px-4 pb-3" style={{ backgroundColor: "var(--background)" }}>
           <SearchBar />
         </div>
