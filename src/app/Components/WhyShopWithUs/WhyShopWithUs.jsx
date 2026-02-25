@@ -78,10 +78,10 @@ const WhyShopWithUs = () => {
         </div>
 
         {/* Trust Badge */}
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-4 md:gap-6 px-8 md:px-12 py-5 
+        <div className="md:flex justify-center">
+          <div className="inline-flex flex-col md:flex-row items-center gap-4 md:gap-6 px-8 md:px-12 py-5 
                           bg-[var(--surface)] border border-[var(--border)] rounded-full shadow-sm 
-                          dark:bg-slate-800/50 dark:border-slate-700">
+                         bg-white dark:bg-slate-800/50 dark:border-slate-700">
             <ShieldCheck className="text-[var(--secondary)]" size={28} />
             <span className="text-[var(--primary)] font-semibold text-base md:text-lg whitespace-nowrap">
               Trusted by thousands of happy customers
