@@ -1,9 +1,14 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 
 export const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -15,7 +20,7 @@ export const authOptions = {
         try {
 
           if (!credentials.otp) {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
               email: credentials.email,
               password: credentials.password,
             });
@@ -25,7 +30,7 @@ export const authOptions = {
             }
           }
 
-          const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/verify-login-otp`, {
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/verify-login-otp`, {
             email: credentials.email,
             otp: credentials.otp,
           });
