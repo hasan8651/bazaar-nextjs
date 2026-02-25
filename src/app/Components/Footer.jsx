@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Facebook, Linkedin, Github, Mail } from 'lucide-react';
-import BazaarLogo from './BazarLogo';
+import BazaarLogo from './BazaarLogo';
 import NewsletterForm from './NewsletterForm'; 
 
 export default function Footer() {
@@ -23,7 +23,7 @@ export default function Footer() {
                     {/* Company Info */}
                     <div className="space-y-6">
                         <div className="flex items-center">
-                            <BazaarLogo />
+                            <BazaarLogo width={180} height={80} />
                         </div>
                         <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-secondary)" }}>
                             Bazaar is your premier destination for curated quality and exceptional style. 

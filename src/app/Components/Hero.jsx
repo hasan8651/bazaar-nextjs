@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { BadgeCheck, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const slides = [
@@ -96,7 +97,7 @@ export default function Hero() {
 
       {/* Foreground content */}
       <div className="relative z-10 max-w-7xl mx-auto h-full px-4 pt-6">
-        <div className="w-full md:w-2/3">
+        <div className="w-full">
           {/* Campaign (changes per slide) */}
           <div className="w-fit rounded-full bg-white/10 px-8 py-1 md:text-3xl font-medium md:font-extrabold text-(--accent) backdrop-blur-sm border border-indigo-500/20">
             <span className="whitespace-pre-line leading-tight">
@@ -115,13 +116,13 @@ export default function Hero() {
           </p>
 
           {/* CTA need update */}
-          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/2">
-            <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
-              Shop Now
-            </button>
-            <button className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
-              View Best Sellers
-            </button>
+          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/3">
+            <Link href="/login" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+              Bazaar Now
+            </Link>
+            <Link href="/register" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+              Be a Seller
+            </Link>
           </div>
         </div>
         {/* Trust badges OK */}

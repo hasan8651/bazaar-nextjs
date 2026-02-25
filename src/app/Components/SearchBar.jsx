@@ -37,7 +37,12 @@ export default function SearchBar() {
         }}
       >
         {categories.map((cat) => (
-          <option key={cat} value={cat} className="bg-white dark:bg-[#1e293b]">
+          <option key={cat} value={cat} 
+          style={{ 
+        backgroundColor: "var(--background)", 
+        color: "var(--text-primary)" 
+      }}
+          className="bg-white dark:bg-[#1e293b]">
             {cat}
           </option>
         ))}

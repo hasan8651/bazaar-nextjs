@@ -1,53 +1,64 @@
-import React from 'react';
-import BazaarLogo from './BazarLogo';
-import { Search, ShoppingCart, Heart, User } from 'lucide-react'; 
+import { Heart, ShoppingCart } from "lucide-react";
+import BazaarLogo from "./BazaarLogo";
+import MobileMenu from "./MobileMenu";
+import SearchBar from "./SearchBar";
+import UserMenu from "./UserMenu";
 
-const Navbar = () => {
-    return (
-        <nav className='p-4 md:p-5 flex items-center bg-gray-400 justify-between  text-black sticky top-0 z-50 shadow-sm'>
-            {/* Logo */}
-            <div className='flex items-center'>
-                <BazaarLogo />
-            </div>
+export default function Navbar() {
+  const dummyUser = {
+    name: 'dummy user',
+    avatar: 'https://i.ibb.co.com/6Rkxc5p8/usericon.png'
+    
+  };
 
-            {/* search bar  */}
-            <div className='hidden md:flex flex-1 mx-10'>
-                <div className='relative w-full max-w-md mx-auto'>
-                    <input 
-                        type="text" 
-                        placeholder="Search for products..." 
-                        className='w-full py-2 px-4 pl-10 rounded-full border-1 focus:outline-none focus:ring-2 focus:ring-black/20'
-                    />
-                    <Search className='absolute left-3 top-2.5 text-gray-500' size={18} />
-                </div>
-            </div>
+  return (
+   
+    <nav className="sticky top-0 z-50 shadow-md py-4 transition-all duration-300 border-b"
+      style={{ 
+        backgroundColor: "var(--background)", 
+        borderColor: "var(--border)" 
+      }}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <MobileMenu />
+          
+          <div className="flex-shrink-0">
+            <BazaarLogo width={180} height={80} />
+            
+          </div>
 
-            {/* icons*/}
-            <div className='flex items-center space-x-5 md:space-x-8'>
-                {/* search icon for mobile */}
-                <button className='md:hidden hover:opacity-70'>
-                    <Search size={24} />
-                </button>
+          <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+            <SearchBar />
+          </div>
 
-                <div className='flex flex-col items-center cursor-pointer hover:opacity-70'>
-                    <User size={22} />
-                    <span className='text-[10px] font-bold hidden md:block'>Account</span>
-                </div>
+          
+          <div className="flex items-center gap-5 md:gap-8" style={{ color: "var(--text-primary)" }}>
+            <UserMenu user={dummyUser} />
 
-                <div className='relative flex flex-col items-center cursor-pointer hover:opacity-70'>
-                    <Heart size={22} />
-                    <span className='absolute -top-1 -right-1 bg-white text-black text-[10px] font-extrabold rounded-full h-4 w-4 flex items-center justify-center shadow-sm'>0</span>
-                    <span className='text-[10px] font-bold hidden md:block'>Wishlist</span>
-                </div>
+            <button className="relative flex flex-col items-center hover:opacity-70 transition">
+              <Heart size={22} />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                0
+              </span>
+              <span className="text-[10px] font-medium hidden md:block mt-0.5">Wishlist</span>
+            </button>
 
-                <div className='relative flex flex-col items-center cursor-pointer hover:opacity-70'>
-                    <ShoppingCart size={22} />
-                    <span className='absolute -top-1 -right-2 bg-black text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center'>0</span>
-                    <span className='text-[10px] font-bold hidden md:block'>Cart</span>
-                </div>
-            </div>
-        </nav>
-    );
-};
+            <button className="relative flex flex-col items-center hover:opacity-70 transition">
+              <ShoppingCart size={22} />
+              <span className="absolute -top-1 -right-1.5 bg-orange-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                0
+              </span>
+              <span className="text-[10px] font-medium hidden md:block mt-0.5">Cart</span>
+            </button>
+          </div>
+        </div>
 
-export default Navbar;
+        {/* MOBILE ONLY SEARCH BAR */}
+        <div className="md:hidden px-4 pb-3" style={{ backgroundColor: "var(--background)" }}>
+          <SearchBar />
+        </div>
+      </div>
+    </nav>
+  );
+}
