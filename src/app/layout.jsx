@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import AuthProvider from "@/provider/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,13 +14,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
-  title: 'Bazaar - Your Shopping Partner',
-  description: 'Easy and Smart Shopping',
+  title: "Bazaar - Your Shopping Partner",
+  description: "Easy and Smart Shopping",
   icons: {
-    icon: '/icon.png',
-    apple: '/icon.png',
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
@@ -29,9 +29,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar></Navbar>
-        <main>{children}</main>
-        <Footer></Footer>
+        <AuthProvider>
+          <Navbar></Navbar>
+          <main>{children}</main>
+          <Footer></Footer>
+        </AuthProvider>
       </body>
     </html>
   );
