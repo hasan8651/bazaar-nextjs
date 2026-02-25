@@ -6,13 +6,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const slides = [
+ 
   {
-    image: "https://i.ibb.co/dwzd0vW8/slide1.webp",
-    campaign: `Wear the Trend. Be the Trend.
-    Upgrade Your Style with Our New Arrivals.`,
-  },
-  {
-    image: "https://i.ibb.co/cKLV5xwB/slide2.webp",
+    image: "https://i.ibb.co/Q35SNGZg/photo-1609081219090-a6d81d3085bf-q-80-w-1326-auto-format-fit-crop-ixlib-rb-4-1.jpg",
     campaign: `Mega Tech Sale: Power Up for Less!
     Premium Tech. Unbeatable Prices.`,
   },
@@ -45,7 +41,7 @@ export default function Hero() {
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="relative w-full h-[80vh] overflow-hidden">
+    <section className="relative w-full h-[80vh] overflow-hidden ">
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -55,7 +51,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1.2 }}
             exit={{ opacity: 0 }}
             transition={{
-              opacity: { duration: 1.2, ease: "easeInOut" }, // crossfade
+              opacity: { duration: 1, ease: "easeInOut" }, // crossfade
               scale: { duration: IMAGE_DURATION, ease: "linear" }, // slow zoom
             }}
           >
@@ -67,66 +63,42 @@ export default function Hero() {
               className="object-cover"
             />
 
-            {/* Shine effect OK */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              initial={{ x: "-200%" }}
-              animate={{ x: "200%" }}
-              transition={{
-                duration: 2,
-                ease: "easeInOut",
-                delay: 2,
-                repeat: Infinity,
-                repeatDelay: 4,
-              }}
-              style={{
-                background:
-                  "linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)",
-                width: "140%",
-                height: "260%",
-                transform: "rotate(25deg)",
-                filter: "blur(10px)",
-              }}
-            />
+          
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Gradient overlay for read text OK */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/70 via-blue-900/40 to-black/70" />
+     <div className="absolute inset-0 bg-(--primary) opacity-30" />
+
 
       {/* Foreground content */}
-      <div className="relative z-10 max-w-7xl mx-auto h-full px-4 pt-6">
-        <div className="w-full">
+      <div className="relative  w-fit mx-auto mt-40">
+        <div >
           {/* Campaign (changes per slide) */}
-          <div className="w-fit rounded-full bg-white/10 px-8 py-1 md:text-3xl font-medium md:font-extrabold text-(--accent) backdrop-blur-sm border border-indigo-500/20">
-            <span className="whitespace-pre-line leading-tight">
-              {currentSlide.campaign}
-            </span>
-          </div>
-
           {/* Main Heading */}
-          <h1 className="mt-12 text-4xl font-bold text-white leading-tight">
+          <h1 className="mt-12 text-4xl font-bold text-white text-center leading-tight">
             Your Daily Essentials, Just a Click Away.
           </h1>
 
           {/* Subheading */}
-          <p className="mt-4 text-base md:text-xl text-white max-w-xl">
+          <p className="mt-6 text-base md:text-xl text-white text-center ">
             Smart Shopping, Superior Style, Seamless Service.
           </p>
+          {/* inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer */}
 
           {/* CTA need update */}
-          <div className="mt-8 md:mt-16 grid grid-cols-2 gap-4 w-2/3 md:w-1/3">
-            <Link href="/login" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+          <div className="mt-10 flex justify-center gap-5">
+            <Link href="/login" className="btn btn-primary !text-white !rounded-full">
               Bazaar Now
             </Link>
-            <Link href="/register" className="inline-flex items-center justify-center rounded-full border border-(--secondary) bg-indigo-500/10 py-3 text-sm md:text-lg font-semibold text-white backdrop-blur-sm transition hover:bg-(--secondary) cursor-pointer">
+            <Link href="/register" className="btn btn-primary !text-white !rounded-full">
               Be a Seller
             </Link>
           </div>
         </div>
         {/* Trust badges OK */}
-        <div className="absolute bottom-2 left-4 right-4 text-gray-400 z-20">
+        {/* <div className="absolute bottom-2 left-4 right-4 text-gray-400 z-20">
           <div className="mt-6 flex flex-col md:flex-row gap-2 md:gap-6 text-sm font-medium opacity-90">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-green-600" /> Secure checkout
@@ -138,7 +110,7 @@ export default function Hero() {
               <BadgeCheck className="w-5 h-5 text-orange-500" /> Safety-tested products only
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
