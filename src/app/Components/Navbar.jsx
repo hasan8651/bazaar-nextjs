@@ -6,11 +6,7 @@ import UserMenu from "./UserMenu";
 
 export default function Navbar() {
 
-  const dummyUser = {
-    name: 'dummy user',
-    avatar: 'https://i.ibb.co.com/6Rkxc5p8/usericon.png'
-  };
-
+  const dummyUser = null;
   return (
    
     <nav className="sticky top-0 z-50 shadow-md py-4 transition-all duration-300 border-b"
