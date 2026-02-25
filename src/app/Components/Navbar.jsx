@@ -5,10 +5,10 @@ import SearchBar from "./SearchBar";
 import UserMenu from "./UserMenu";
 
 export default function Navbar() {
+
   const dummyUser = {
     name: 'dummy user',
     avatar: 'https://i.ibb.co.com/6Rkxc5p8/usericon.png'
-    
   };
 
   return (

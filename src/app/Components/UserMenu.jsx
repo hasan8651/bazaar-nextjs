@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { User, Moon, Sun, ChevronDown, Settings, LogOut, Package } from "lucide-react";
 
 export default function UserMenu({ user }) {
+
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -36,7 +37,6 @@ export default function UserMenu({ user }) {
 
   return (
     <div className="relative">
-      {/* User Icon Trigger - CSS Variable ব্যবহার করে */}
       <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-1 group focus:outline-none">
         <div className="p-2 rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)]">
           <User size={20} strokeWidth={2.5} />
@@ -44,13 +44,12 @@ export default function UserMenu({ user }) {
         <ChevronDown size={14} className={`text-[var(--text-secondary)] transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
 
-      {/* Dropdown Menu - সরাসরি CSS Variable দিয়ে Force করা হয়েছে */}
       {isOpen && (
         <>
           <div className="fixed inset-0 z-[90]" onClick={() => setIsOpen(false)}></div>
           
           <div 
-            style={{ backgroundColor: 'var(--background)' }} // Inline style দিয়ে Force করছি
+            style={{ backgroundColor: 'var(--background)' }} 
             className="absolute right-0 mt-3 w-60 overflow-hidden z-[100] rounded-2xl border border-[var(--border)] shadow-xl shadow-black/10"
           >
             {user && (
