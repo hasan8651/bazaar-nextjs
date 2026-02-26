@@ -1,5 +1,5 @@
 import React from 'react';
-import BazaarLogo from './Components/BazaarLogo';
+import BrandLogo from './BrandLogo';
 
 export default function Loading() {
   return (
@@ -14,7 +14,7 @@ export default function Loading() {
 
       <div className="mt-8 flex flex-col items-center gap-2">
         <div className="animate-pulse">
-          <BazaarLogo width={220} height={100} />
+          <BrandLogo width={220} height={100} />
           </div>
         <p className="text-xs font-bold text-gray-500 uppercase tracking-[0.3em] animate-bounce">
           Loading Experience...

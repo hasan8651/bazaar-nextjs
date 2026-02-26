@@ -1,7 +1,7 @@
 import Link from 'next/link';
-
 import { Home, ArrowLeft } from 'lucide-react';
-import BazaarLogo from './Components/BazaarLogo';
+import BrandLogo from './BrandLogo';
+
 
 export default function NotFound() {
   return (
@@ -17,9 +17,9 @@ export default function NotFound() {
             404
           </h1>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-             {/* Bazaar Name with Accent line */}
+             {/* Brand Name with Accent line */}
              <div className="flex flex-col items-center">
-                   <BazaarLogo width={240} height={120} />
+                   <BrandLogo width={240} height={120} />
                 
              </div>
           </div>
@@ -49,7 +49,7 @@ export default function NotFound() {
         {/* Bottom Decorative Line */}
         <div className="mt-20 flex justify-center items-center gap-4 opacity-20">
             <div className="h-[1px] w-12 bg-[var(--text-secondary)]" />
-            <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-[var(--text-secondary)]">Bazaar Error 404</span>
+            <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-[var(--text-secondary)]">PrimeMart Error 404</span>
             <div className="h-[1px] w-12 bg-[var(--text-secondary)]" />
         </div>
       </div>
