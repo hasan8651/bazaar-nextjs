@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
 import AuthProvider from "@/provider/AuthProvider";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 
 
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Bazaar - Your Shopping Partner",
+  title: "PrimeMart - Your Shopping Partner",
   description: "Easy and Smart Shopping",
   icons: {
     icon: "/icon.png",
@@ -32,9 +32,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Navbar></Navbar>
+          <Navbar />
           <main>{children}</main>
-          <Footer></Footer>
+          <Footer/>
         </AuthProvider>
       </body>
     </html>

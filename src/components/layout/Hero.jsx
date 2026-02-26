@@ -1,6 +1,5 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { BadgeCheck, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -90,7 +89,7 @@ export default function Hero() {
           {/* CTA need update */}
           <div className="mt-10 flex justify-center gap-5">
             <Link href="/login" className="btn btn-primary !text-white !rounded-full">
-              Bazaar Now
+              Shop Now
             </Link>
             <Link href="/register" className="btn btn-primary !text-white !rounded-full">
               Be a Seller

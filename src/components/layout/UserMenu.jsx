@@ -102,7 +102,7 @@ export default function UserMenu({ user }) {
             ) : (
               <div className="p-4 text-center">
                 <p className="text-xs text-[var(--text-secondary)] mb-3 font-medium">
-                  Welcome to Bazaar!
+                  Welcome to PrimeMart!
                 </p>
                 <Link
                   href="/login"

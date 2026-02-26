@@ -5,7 +5,7 @@ import { Zap, ArrowRight, Plus, Flame, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function FlashDeal() {
+export default function FlashDeals() {
   const products = [
     {
       id: 1,
