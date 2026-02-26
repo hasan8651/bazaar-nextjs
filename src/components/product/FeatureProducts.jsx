@@ -48,13 +48,13 @@ export default function FeatureProducts() {
   if (error) return null;
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto">
+    <section className="py-12 px-4 max-w-7xl mx-auto bg-[var(--background)]">
       <div className="flex justify-between items-end mb-8">
         {/* <div>
           <h2 className="text-3xl font-bold text-gray-900">Featured Products</h2>
           <p className="text-gray-500 mt-2">Selected items from our best categories</p>
         </div> */}
-                <div className="text-center mb-12 md:mb-16 bg-[var(--surface)]">
+                <div className="text-center mb-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--primary)]">
             Featured <span className="text-[var(--secondary)]">Products</span>
           </h1>
