@@ -61,7 +61,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ fontFamily: "'DM Sans', sans-serif", background: "#F8FAFC" }}>
+    <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--background)]">
       <Toaster position="top-center" />
       
       <div className="w-full max-w-md">
@@ -69,46 +69,43 @@ export default function LoginPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#0EA5A4]/10 text-[#0EA5A4] mb-4">
             {step === 1 ? <Lock size={32} /> : <ShieldCheck size={32} />}
           </div>
-          <h1 className="text-3xl font-bold mb-1" style={{ color: "#1E293B" }}>
+          <h1 className="text-3xl font-bold mb-1 text-[var(--primary)]">
             {step === 1 ? "Welcome Back" : "Security Check"}
           </h1>
-          <p className="text-sm" style={{ color: "#64748B" }}>
+          <p className="text-sm text-[var(--text-secondary)]">
             {step === 1 ? "Sign in to continue shopping" : "Please enter the code sent to your email"}
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 shadow-xl border" style={{ borderColor: "#E2E8F0" }}>
+        <div className="bg-[var(--background)] rounded-3xl p-8 shadow-xl border border-[var(--border)]">
           <form onSubmit={handleLogin} className="space-y-5">
             {step === 1 ? (
               <>
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold ml-1" style={{ color: "#1E293B" }}>Email Address</label>
+                  <label className="text-sm font-semibold ml-1 text-[var(--text-primary)]">Email Address</label>
                   <div className="relative">
-                    <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "#94A3B8" }} />
+                    <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-primary)]"/>
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full pl-11 pr-4 py-3.5 rounded-2xl text-sm outline-none transition-all border bg-slate-50 focus:bg-white focus:ring-2 focus:ring-[#0EA5A4]/20"
-                      style={{ borderColor: "#E2E8F0" }}
-                    />
+                      className="w-full pl-11 pr-4 py-3.5 rounded-2xl text-sm outline-none transition-all border text-[var(--text-secondary)] bg-[var(--surface)] focus:bg-white focus:ring-2 focus:ring-[#0EA5A4]/20"/>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold ml-1" style={{ color: "#1E293B" }}>Password</label>
+                  <label className="text-sm font-semibold ml-1 text-[var(--text-primary)]">Password</label>
                   <div className="relative">
-                    <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "#94A3B8" }} />
+                    <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-primary)]" />
                     <input
                       type={showPassword ? "text" : "password"}
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-11 pr-12 py-3.5 rounded-2xl text-sm outline-none transition-all border bg-slate-50 focus:bg-white focus:ring-2 focus:ring-[#0EA5A4]/20"
-                      style={{ borderColor: "#E2E8F0" }}
+                      className="w-full pl-11 pr-12 py-3.5 rounded-2xl text-sm outline-none transition-all border text-[var(--text-secondary)] bg-[var(--surface)] focus:bg-white focus:ring-2 focus:ring-[#0EA5A4]/20"
                     />
                     <button
                       type="button"
@@ -121,15 +118,15 @@ export default function LoginPage() {
                 </div>
 
                 <div className="text-right">
-                  <a href="#" className="text-xs font-bold hover:underline" style={{ color: "#0EA5A4" }}>Forgot password?</a>
+                  <a href="#" className="text-xs font-bold hover:underline text-[var(--secondary)]">Forgot password?</a>
                 </div>
               </>
             ) : (
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-center block" style={{ color: "#1E293B" }}>Verification Code</label>
+                  <label className="text-sm font-semibold text-center block text-[var(--secondary)]">Verification Code</label>
                   <div className="relative">
-                    <KeyRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "#94A3B8" }} />
+                    <KeyRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       required
@@ -137,7 +134,7 @@ export default function LoginPage() {
                       value={otp}
                       onChange={(e) => setOtp(e.target.value.toUpperCase())}
                       placeholder="EX: A1B2C3D4"
-                      className="w-full pl-11 pr-4 py-4 rounded-2xl text-center text-xl font-bold tracking-[4px] outline-none border-2 bg-slate-50 focus:bg-white focus:border-[#0EA5A4]"
+                      className="w-full pl-11 pr-4 py-4 rounded-2xl text-center text-xl font-bold tracking-[4px] outline-none border-2 bg-[var(--surface)] focus:bg-white focus:border-[#0EA5A4]"
                     />
                   </div>
                 </div>
@@ -150,9 +147,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-4 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-[#0EA5A4]/30 active:scale-[0.98] disabled:opacity-70"
-              style={{ background: "#0EA5A4" }}
-            >
+              className="w-full py-4 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-[#0EA5A4]/30 active:scale-[0.98] disabled:opacity-70 btn-primary">
               {isLoading ? "Processing..." : step === 1 ? "Sign In" : "Verify & Login"}
               {!isLoading && <ArrowRight size={18} />}
             </button>
@@ -162,14 +157,12 @@ export default function LoginPage() {
             <>
               <div className="relative my-8">
                 <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-slate-100"></span></div>
-                <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-4 text-slate-400 font-medium">Or continue with</span></div>
+                <div className="relative flex justify-center text-xs uppercase"><span className="bg-[var(--background)] px-4 text-slate-400 font-medium">Or continue with</span></div>
               </div>
 
               <button
                 onClick={handleGoogleLogin}
-                className="w-full py-3.5 rounded-2xl text-sm font-semibold border-2 flex items-center justify-center gap-3 transition-all hover:bg-slate-50 active:scale-[0.98]"
-                style={{ borderColor: "#E2E8F0", color: "#1E293B" }}
-              >
+                className="w-full py-3.5 rounded-2xl text-sm font-semibold border-2 border-[var(--border)] flex items-center justify-center gap-3 transition-all bg-[var(--surface)] text-[var(--text-primary)] active:scale-[0.98] btn-secondary">
                 <svg width="20" height="20" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -182,8 +175,8 @@ export default function LoginPage() {
           )}
         </div>
 
-        <p className="mt-8 text-center text-sm" style={{ color: "#64748B" }}>
-          Don't have an account? <a href="/register" className="font-bold hover:underline" style={{ color: "#0EA5A4" }}>Create for free</a>
+        <p className="mt-8 text-center text-sm text-[var(--text-primary)]">
+          Don't have an account? <a href="/register" className="font-bold text-[var(--secondary)] hover:underline">Create for free</a>
         </p>
       </div>
     </div>
