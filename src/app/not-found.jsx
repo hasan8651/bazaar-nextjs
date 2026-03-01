@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Home, ArrowLeft } from 'lucide-react';
-import BrandLogo from './BrandLogo';
+import BrandLogo from '@/components/common/BrandLogo';
+
 
 
 export default function NotFound() {

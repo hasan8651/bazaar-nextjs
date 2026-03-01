@@ -1,13 +1,13 @@
 
-// import TopBrands from './Components/TopBrands';
-// import TopProducts from './Components/TopProducts';
-// import UpcomingProducts from './Components/UpcomingProducts';
 import Hero from "@/components/layout/Hero";
 import PopularCategories from "@/components/layout/PopularCategories/PopularCategories";
 import Testimonials from "@/components/layout/Testimonials";
 import WhyShopWithUs from "@/components/layout/WhyShopWithUs/WhyShopWithUs";
 import FeatureProducts from "@/components/product/FeatureProducts";
 import FlashDeals from "@/components/product/FlashDeals/FlashDeals";
+import TopBrands from '@/components/product/TopBrands';
+import TopProducts from '@/components/product/TopProducts';
+import UpcomingProducts from "@/components/product/UpcomingProducts";
 
 
 export default function Home() {
@@ -16,11 +16,11 @@ export default function Home() {
       
       <Hero />
       <FlashDeals />
-      {/* <TopProducts />
-      <UpcomingProducts /> */}
+      <TopProducts></TopProducts>
+      <UpcomingProducts></UpcomingProducts>
       <FeatureProducts />
       <PopularCategories/>
-      {/* <TopBrands /> */}
+      <TopBrands></TopBrands>
       <Testimonials />
       <WhyShopWithUs/>
       
