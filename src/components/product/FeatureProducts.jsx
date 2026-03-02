@@ -4,7 +4,8 @@ import axiosInstance from "@/lib/axiosInstance";
 import { Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard/ProductCard";
-import Loading from "../common/Loading";
+import Loading from "@/app/loading";
+
 
 export default function FeatureProducts() {
   const [products, setProducts] = useState([]);

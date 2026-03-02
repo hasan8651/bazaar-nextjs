@@ -1,5 +1,6 @@
+import BrandLogo from '@/components/common/BrandLogo';
 import React from 'react';
-import BrandLogo from './BrandLogo';
+
 
 export default function Loading() {
   return (
