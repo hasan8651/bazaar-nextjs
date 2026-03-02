@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/provider/AuthProvider";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import LayoutWrapper from "@/components/layout/LayoutWrapper/LayoutWrapper";
+
 
 
 
@@ -32,9 +32,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer/>
+          
+          <LayoutWrapper>
+            <main>{children}</main>
+          </LayoutWrapper>
+         
         </AuthProvider>
       </body>
     </html>
