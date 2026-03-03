@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import Sidebar from "@/components/dashboard/Sidebar";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import { useSession } from "next-auth/react";
 
 export default function UserLayout({ children }) {
   // State for mobile sidebar toggle
