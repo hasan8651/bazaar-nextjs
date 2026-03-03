@@ -1,29 +1,24 @@
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Sidebar from "@/components/dashboard/Sidebar";
-import DashboardHeader from "@/components/dashboard/DashboardHeader"; // assuming you have this component
 
 export default function SellerLayout({ children }) {
   return (
     /* flex ensures sidebar and content are side-by-side */
     <div className="flex min-h-screen bg-[var(--background)]">
-      
       {/* Sidebar - Visible on medium screens and up */}
       <div className="hidden md:block">
         <Sidebar role="seller" />
       </div>
-      
+
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
-        
         {/* Top Header Section */}
         <DashboardHeader role="seller" />
 
         {/* Dynamic Content with Scrollable Container */}
         <div className="flex-1 p-6 md:p-10 overflow-y-auto custom-scrollbar">
-          <div className="max-w-[1400px] mx-auto">
-            {children}
-          </div>
+          <div className="max-w-[1400px] mx-auto">{children}</div>
         </div>
-        
       </main>
     </div>
   );

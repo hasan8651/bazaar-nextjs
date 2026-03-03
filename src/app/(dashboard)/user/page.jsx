@@ -13,8 +13,8 @@ import {
   Zap,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
-import DashboardCard from "@/components/Dashboard/DashboardCard";
-import DashboardGraph from "@/components/Dashboard/DashboardGraph";
+import DashboardCard from "@/components/dashboard/DashboardCard";
+import DashboardGraph from "@/components/dashboard/DashboardGraph";
 
 // Mock Data for the graph
 const ANALYTICS_DATA = [
@@ -77,57 +77,62 @@ export default function UserDashboard() {
     <div className="space-y-10 pb-10">
       {/* 1. Ultra-Clean Premium Welcome Section */}
       <div className="relative overflow-hidden rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] p-8 md:p-14 shadow-sm">
-  {/* Subtle Background Glow */}
-  <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--secondary)] opacity-[0.03] rounded-full blur-[100px] -mr-20 -mt-20"></div>
+        {/* Subtle Background Glow */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--secondary)] opacity-[0.03] rounded-full blur-[100px] -mr-20 -mt-20"></div>
 
-  <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-    {/* Minimalist Avatar */}
-    <div className="shrink-0">
-      <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-gradient-to-tr from-[var(--secondary)] to-[var(--secondary)]/30 p-[2px]">
-        <div className="w-full h-full rounded-[2.3rem] bg-[var(--surface)] p-1">
-          {session?.user?.image ? (
-            <img
-              src={session.user.image}
-              alt={userName}
-              className="w-full h-full object-cover rounded-[2rem]"
-            />
-          ) : (
-            <div className="w-full h-full rounded-[2rem] bg-[var(--secondary)]/5 flex items-center justify-center">
-              <span className="text-4xl font-black text-[var(--secondary)]">
-                {userName.charAt(0)}
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+          {/* Minimalist Avatar */}
+          <div className="shrink-0">
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-gradient-to-tr from-[var(--secondary)] to-[var(--secondary)]/30 p-[2px]">
+              <div className="w-full h-full rounded-[2.3rem] bg-[var(--surface)] p-1">
+                {session?.user?.image ? (
+                  <img
+                    src={session.user.image}
+                    alt={userName}
+                    className="w-full h-full object-cover rounded-[2rem]"
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-[2rem] bg-[var(--secondary)]/5 flex items-center justify-center">
+                    <span className="text-4xl font-black text-[var(--secondary)]">
+                      {userName.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Simple & Bold Greeting + Branding */}
+          <div className="text-center md:text-left">
+            {/* --- PrimeMart Brand Badge --- */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/5 border border-[var(--secondary)]/10 mb-4 group cursor-default transition-all duration-300 hover:bg-[var(--secondary)]/10">
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] animate-pulse"></div>
+              <span className="text-[10px] font-bold text-[var(--secondary)] uppercase tracking-[0.2em]">
+                Prime
+                <span className="text-[var(--text-primary)] opacity-70">
+                  Mart
+                </span>{" "}
+                Official
               </span>
             </div>
-          )}
+
+            <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tight leading-tight">
+              {greeting}, <br className="hidden md:block" />
+              <span className="text-[var(--secondary)]">{userName}</span>
+            </h1>
+
+            <p className="text-[var(--text-secondary)] text-lg md:text-xl mt-4 font-medium opacity-70 max-w-xl">
+              It’s good to have you back at{" "}
+              <span className="relative inline-block font-bold text-[var(--text-primary)] group">
+                PrimeMart
+                {/* Underline Glow Effect */}
+                <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[var(--secondary)] to-transparent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+              </span>
+              . Here’s what’s happening today.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-
-    {/* Simple & Bold Greeting + Branding */}
-    <div className="text-center md:text-left">
-      {/* --- PrimeMart Brand Badge --- */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/5 border border-[var(--secondary)]/10 mb-4 group cursor-default transition-all duration-300 hover:bg-[var(--secondary)]/10">
-        <div className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] animate-pulse"></div>
-        <span className="text-[10px] font-bold text-[var(--secondary)] uppercase tracking-[0.2em]">
-          Prime<span className="text-[var(--text-primary)] opacity-70">Mart</span> Official
-        </span>
-      </div>
-
-      <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tight leading-tight">
-        {greeting}, <br className="hidden md:block" />
-        <span className="text-[var(--secondary)]">{userName}</span>
-      </h1>
-      
-      <p className="text-[var(--text-secondary)] text-lg md:text-xl mt-4 font-medium opacity-70 max-w-xl">
-        It’s good to have you back at <span className="relative inline-block font-bold text-[var(--text-primary)] group">
-          PrimeMart
-          {/* Underline Glow Effect */}
-          <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[var(--secondary)] to-transparent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
-        </span>. 
-        Here’s what’s happening today.
-      </p>
-    </div>
-  </div>
-</div>
 
       {/* 2. Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -215,8 +220,8 @@ export default function UserDashboard() {
                         order.status === "Delivered"
                           ? "bg-green-500/10 text-green-500"
                           : order.status === "Pending"
-                            ? "bg-amber-500/10 text-amber-500"
-                            : "bg-blue-500/10 text-blue-500"
+                          ? "bg-amber-500/10 text-amber-500"
+                          : "bg-blue-500/10 text-blue-500"
                       }`}
                     >
                       {order.status === "Delivered" && (
