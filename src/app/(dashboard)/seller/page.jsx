@@ -2,8 +2,8 @@
 
 import React from "react";
 import { DollarSign, Package, ShoppingCart, Plus, Clock } from "lucide-react";
-import DashboardCard from "@/components/dashboard/DashboardCard";
-import SellerStatsGraph from "@/components/dashboard/SellerStatsGraph";
+import DashboardCard from "@/components/Dashboard/DashboardCard";
+import SellerStatsGraph from "@/components/Dashboard/SellerStatsGraph";
 
 export default function SellerDashboard() {
   return (
@@ -19,7 +19,7 @@ export default function SellerDashboard() {
           </p>
         </div>
 
-        <button className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-green-600/20">
+        <button className="flex items-center px-6 py-3 bg-[var(--secondary)] text-white rounded-xl text-xs font-bold hover:scale-105 transition-transform shadow-lg shadow-[var(--secondary)]/20">
           <Plus size={18} strokeWidth={3} />
           Add New Product
         </button>

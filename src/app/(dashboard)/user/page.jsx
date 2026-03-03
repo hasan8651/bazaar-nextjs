@@ -13,8 +13,8 @@ import {
   Zap,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
-import DashboardCard from "@/components/dashboard/DashboardCard";
-import DashboardGraph from "@/components/dashboard/DashboardGraph";
+import DashboardCard from "@/components/Dashboard/DashboardCard";
+import DashboardGraph from "@/components/Dashboard/UserGraph";
 
 // Mock Data for the graph
 const ANALYTICS_DATA = [
