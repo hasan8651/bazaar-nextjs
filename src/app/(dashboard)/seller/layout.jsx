@@ -1,5 +1,5 @@
-import Sidebar from "@/components/dashboard/Sidebar";
-import DashboardHeader from "@/components/dashboard/DashboardHeader"; // assuming you have this component
+import Sidebar from "@/components/Dashboard/Sidebar";
+import DashboardHeader from "@/components/Dashboard/DashboardHeader"; 
 
 export default function SellerLayout({ children }) {
   return (
@@ -23,7 +23,9 @@ export default function SellerLayout({ children }) {
             {children}
           </div>
         </div>
-        
+        <footer className="mt-20 py-6 text-center text-xs text-gray-400 border-t border-gray-100">
+            Seller Panel © 2026 PrimeMart System Control.
+          </footer>
       </main>
     </div>
   );
