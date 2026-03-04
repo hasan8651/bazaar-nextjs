@@ -67,11 +67,11 @@ const AdminPage = () => {
           </h1>
           <p className="text-[var(--text-secondary)] text-sm mt-1 font-medium">
             Welcome back! Here is what's happening on{" "}
-            <span className="text-[var(--secondary)] font-bold">Bazaar</span>{" "}
+            <span className="text-[var(--secondary)] font-bold">PrimeMart</span>{" "}
             today.
           </p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-[var(--secondary)] text-white rounded-xl text-xs font-bold hover:scale-105 transition-transform shadow-lg shadow-[var(--secondary)]/20">
+        <button className="w-fit flex items-center gap-2 px-6 py-3 bg-[var(--secondary)] text-white rounded-xl text-xs font-bold hover:scale-105 transition-transform shadow-lg shadow-[var(--secondary)]/20">
           Generate Report <ArrowUpRight size={16} />
         </button>
       </div>

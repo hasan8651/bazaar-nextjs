@@ -6,8 +6,8 @@ import WhyShopWithUs from "@/components/layout/WhyShopWithUs/WhyShopWithUs";
 import FeatureProducts from "@/components/product/FeatureProducts";
 import FlashDeals from "@/components/product/FlashDeals/FlashDeals";
 import TopBrands from '@/components/product/TopBrands';
-import TopProducts from '@/components/product/TopProducts';
-import UpcomingProducts from "@/components/product/UpcomingProducts";
+// import TopProducts from '@/components/product/TopProducts';
+// import UpcomingProducts from "@/components/product/UpcomingProducts";
 
 
 export default function Home() {
@@ -16,8 +16,8 @@ export default function Home() {
       
       <Hero />
       <FlashDeals />
-      <TopProducts></TopProducts>
-      <UpcomingProducts></UpcomingProducts>
+      {/* <TopProducts></TopProducts>
+      <UpcomingProducts></UpcomingProducts> */}
       <FeatureProducts />
       <PopularCategories/>
       <TopBrands></TopBrands>
