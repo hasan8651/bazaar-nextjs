@@ -10,6 +10,7 @@ import {
   LogOut,
   Package,
   LogIn,
+  LayoutDashboard, 
 } from "lucide-react";
 import { signOut } from "next-auth/react"; 
 import Link from "next/link";
@@ -18,6 +19,9 @@ import Image from "next/image";
 export default function UserMenu({ user }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // dashboard path condition
+  const dashboardPath = user?.role === "seller" ? "/seller" : "/user";
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -76,21 +80,43 @@ export default function UserMenu({ user }) {
                   <p className="text-sm font-bold text-[var(--text-primary)] truncate">
                     {user.name}
                   </p>
-                  <p className="text-[10px] text-[var(--text-secondary)] truncate">
-                    {user.email}
-                  </p>
+                  <div className="flex items-center gap-2">
+                     <p className="text-[10px] text-[var(--text-secondary)] truncate">
+                       {user.email}
+                     </p>
+                     {user?.role === "seller" && (
+                       <span className="text-[8px] bg-green-500/10 text-green-600 px-1.5 py-0.5 rounded font-bold uppercase">Seller</span>
+                     )}
+                  </div>
                 </div>
 
                 <ul className="flex flex-col py-2">
-                  <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
-                    <User size={18} className="text-blue-500" /> Profile
-                  </li>
-                  <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
-                    <Package size={18} className="text-orange-500" /> Orders
-                  </li>
+                  {/* --- add dashboard--- */}
+                  <Link href={dashboardPath} onClick={() => setIsOpen(false)}>
+                    <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
+                      <LayoutDashboard size={18} className="text-purple-500" /> 
+                      {user?.role === "seller" ? "Seller Dashboard" : "My Dashboard"}
+                    </li>
+                  </Link>
+
+                  <Link href="/user/profile" onClick={() => setIsOpen(false)}>
+                    <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
+                      <User size={18} className="text-blue-500" /> Profile
+                    </li>
+                  </Link>
+
+                  <Link href="/user/orders" onClick={() => setIsOpen(false)}>
+                    <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
+                      <Package size={18} className="text-orange-500" /> Orders
+                    </li>
+                  </Link>
+
                   <li className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] cursor-pointer text-sm font-semibold text-[var(--text-primary)] transition-colors">
                     <Settings size={18} className="text-gray-400" /> Settings
                   </li>
+
+                  <div className="border-t border-[var(--border)] my-1 opacity-50"></div>
+
                   <li
                     onClick={() => signOut()} 
                     className="flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer text-sm font-semibold text-red-500 transition-colors"
@@ -102,7 +128,7 @@ export default function UserMenu({ user }) {
             ) : (
               <div className="p-4 text-center">
                 <p className="text-xs text-[var(--text-secondary)] mb-3 font-medium">
-                  Welcome to Bazaar!
+                  Welcome to PrimeMart!
                 </p>
                 <Link
                   href="/login"

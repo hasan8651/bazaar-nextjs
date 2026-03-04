@@ -4,6 +4,8 @@ import axiosInstance from "@/lib/axiosInstance";
 import { Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard/ProductCard";
+import Loading from "@/app/loading";
+
 
 export default function FeatureProducts() {
   const [products, setProducts] = useState([]);
@@ -38,7 +40,7 @@ export default function FeatureProducts() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="animate-spin text-orange-500 mb-2" size={40} />
+        <Loading />
         <p className="text-gray-500 font-medium">Loading products...</p>
       </div>
     );
@@ -47,15 +49,23 @@ export default function FeatureProducts() {
   if (error) return null;
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto">
+    <section className="py-12 px-4 max-w-7xl mx-auto bg-[var(--background)]">
       <div className="flex justify-between items-end mb-8">
-        <div>
+        {/* <div>
           <h2 className="text-3xl font-bold text-gray-900">Featured Products</h2>
           <p className="text-gray-500 mt-2">Selected items from our best categories</p>
+        </div> */}
+                <div className="text-center mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--primary)]">
+            Featured <span className="text-[var(--secondary)]">Products</span>
+          </h1>
+          <p className="mt-4 text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
+            Selected items from our best categories
+          </p>
         </div>
         <Link
           href="/shop"
-          className="flex items-center gap-2 text-orange-600 font-semibold hover:gap-3 transition-all"
+          className="flex items-center gap-2 text-[var(--secondary)] font-semibold hover:gap-3 transition-all"
         >
           View All <ArrowRight size={18} />
         </Link>

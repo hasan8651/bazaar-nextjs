@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Facebook, Linkedin, Github, Mail } from 'lucide-react';
-import BazaarLogo from './BazaarLogo';
-import NewsletterForm from './NewsletterForm'; 
+import BrandLogo from '../common/BrandLogo';
+import NewsletterForm from './NewsletterForm';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -23,10 +23,10 @@ export default function Footer() {
                     {/* Company Info */}
                     <div className="space-y-6">
                         <div className="flex items-center">
-                            <BazaarLogo width={180} height={80} />
+                            <BrandLogo width={180} height={80} />
                         </div>
                         <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-secondary)" }}>
-                            Bazaar is your premier destination for curated quality and exceptional style. 
+                            PrimeMart is your premier destination for curated quality and exceptional style. 
                             We bridge the gap between world-class craftsmanship and your everyday needs, 
                             bringing a marketplace of excellence right to your doorstep with a commitment 
                             to authenticity and premium service.
@@ -78,10 +78,10 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 transition-colors" style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}>
                     <p className="text-xs">
-                        &copy; {currentYear} Bazaar. Crafted with passion for quality shopping.
+                        &copy; {currentYear} PrimeMart. Crafted with passion for quality shopping.
                     </p>
                     <div className="flex items-center gap-2 text-xs hover:text-[var(--secondary)] transition-colors cursor-pointer">
-                        <Mail size={14} /> <span>support@bazaar.com</span>
+                        <Mail size={14} /> <span>support@primemart.com</span>
                     </div>
                 </div>
             </div>

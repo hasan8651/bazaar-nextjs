@@ -1,26 +1,28 @@
-import FeatureProducts from './Components/FeatureProducts';
-import FlashDeal from './Components/Flash-Deals/FlashDeals';
-import Hero from './Components/Hero';
-import PopularCategories from './Components/PopularCategories/PopularCategories';
-import Testimonials from './Components/Testimonials';
-// import TopBrands from './Components/TopBrands';
-// import TopProducts from './Components/TopProducts';
-// import UpcomingProducts from './Components/UpcomingProducts';
-import WhyShopWithUs from './Components/WhyShopWithUs/WhyShopWithUs';
+
+import Hero from "@/components/layout/Hero";
+import PopularCategories from "@/components/layout/PopularCategories/PopularCategories";
+import Testimonials from "@/components/layout/Testimonials";
+import WhyShopWithUs from "@/components/layout/WhyShopWithUs/WhyShopWithUs";
+import FeatureProducts from "@/components/product/FeatureProducts";
+import FlashDeals from "@/components/product/FlashDeals/FlashDeals";
+import TopBrands from '@/components/product/TopBrands';
+import TopProducts from '@/components/product/TopProducts';
+import UpcomingProducts from "@/components/product/UpcomingProducts";
+
 
 export default function Home() {
   return (
     <main>
       
       <Hero />
-      <FlashDeal></FlashDeal>
-      {/* <TopProducts />
-      <UpcomingProducts /> */}
+      <FlashDeals />
+      <TopProducts></TopProducts>
+      <UpcomingProducts></UpcomingProducts>
       <FeatureProducts />
-      <PopularCategories></PopularCategories>
-      {/* <TopBrands /> */}
+      <PopularCategories/>
+      <TopBrands></TopBrands>
       <Testimonials />
-      <WhyShopWithUs></WhyShopWithUs>
+      <WhyShopWithUs/>
       
     </main>
   );

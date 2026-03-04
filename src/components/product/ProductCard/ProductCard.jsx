@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
+      className="group relative bg-[var(--surface)] rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
     >
       {discount?.value > 0 && (
         <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded">
@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
         </div>
       )}
 
-      <div className="relative aspect-square overflow-hidden bg-gray-50 flex-shrink-0">
+      <div className="relative aspect-square overflow-hidden bg-[var(--background)] flex-shrink-0">
         <Image
           src={images?.thumbnail || "/placeholder.jpg"}
           alt={name}
@@ -46,25 +46,25 @@ const ProductCard = ({ product }) => {
         />
         
         <div className="absolute bottom-2 sm:bottom-[-50px] sm:group-hover:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-2 transition-all duration-300 px-1">
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-orange-500 hover:text-white transition-colors">
+          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-[var(--secondary)] hover:text-white transition-colors">
             <Heart className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
           </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-orange-500 hover:text-white transition-colors">
+          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-[var(--secondary)] hover:text-white transition-colors">
             <Eye className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
           </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-orange-500 hover:text-white transition-colors">
+          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-[var(--secondary)] hover:text-white transition-colors">
             <RefreshCw className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
           </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-orange-500 hover:text-white transition-colors">
+          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-[var(--secondary)] hover:text-white transition-colors">
             <ShoppingCart className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
           </button>
         </div>
       </div>
 
       <div className="p-3 sm:p-4 flex flex-col flex-grow">
-        <p className="text-[10px] sm:text-xs text-gray-400 mb-1 uppercase tracking-wider">{category?.name || "Uncategorized"}</p>
+        <p className="text-[10px] sm:text-xs text-[var(--text-primary)] mb-1 uppercase tracking-wider">{category?.name || "Uncategorized"}</p>
         <Link href={`/product/${slug}`} className="flex-grow">
-          <h3 className="text-gray-800 font-medium text-xs sm:text-sm lg:text-base line-clamp-2 hover:text-orange-600 transition-colors leading-tight">
+          <h3 className="text-[var(--primary)] font-medium text-xs sm:text-sm lg:text-base line-clamp-2 hover:text-[var(--secondary)] transition-colors leading-tight">
             {name}
           </h3>
         </Link>
@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-1.5 sm:gap-3">
-          <span className="text-sm sm:text-base lg:text-lg font-bold text-slate-900">
+          <span className="text-sm sm:text-base lg:text-lg font-bold text-[var(--primary)]">
             ${pricing?.basePrice?.toFixed(2) || "0.00"}
           </span>
           {pricing?.oldPrice > pricing?.basePrice && (
