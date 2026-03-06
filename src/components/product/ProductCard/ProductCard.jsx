@@ -6,6 +6,7 @@ import { Heart, Eye, RefreshCw, ShoppingCart, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useRouter } from "next/navigation";
 
 function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -13,10 +14,14 @@ function cn(...inputs) {
 
 const ProductCard = ({ product }) => {
   if (!product) return null;
+  const router = useRouter()
+
+  console.log(product)
 
   const {
     name = "No Name",
     slug = "#",
+    _id,
     category = {},
     pricing = { basePrice: 0, oldPrice: 0 },
     images = {},
@@ -25,11 +30,14 @@ const ProductCard = ({ product }) => {
     inventory = { totalStock: 0, stockStatus: "" }
   } = product;
 
+ 
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="group relative bg-[var(--surface)] rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
+   
     >
       {discount?.value > 0 && (
         <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded">
@@ -63,7 +71,7 @@ const ProductCard = ({ product }) => {
 
       <div className="p-3 sm:p-4 flex flex-col flex-grow">
         <p className="text-[10px] sm:text-xs text-[var(--text-primary)] mb-1 uppercase tracking-wider">{category?.name || "Uncategorized"}</p>
-        <Link href={`/product/${slug}`} className="flex-grow">
+        <Link href={`/productDetails/${_id}`} className="flex-grow">
           <h3 className="text-[var(--primary)] font-medium text-xs sm:text-sm lg:text-base line-clamp-2 hover:text-[var(--secondary)] transition-colors leading-tight">
             {name}
           </h3>
