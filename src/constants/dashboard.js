@@ -35,7 +35,7 @@ export const MENU_ITEMS = {
 
   // --- Seller Dashboard Menu ---
   seller: [
-    { title: "Overview", path: "/seller", icon: LayoutDashboard },
+    { title: "Dashboard", path: "/seller", icon: LayoutDashboard },
     { title: "My Products", path: "/seller/products", icon: Package },
     { title: "Add Product", path: "/seller/add-product", icon: PlusCircle },
     { title: "Orders", path: "/seller/orders", icon: Truck },
@@ -47,8 +47,10 @@ export const MENU_ITEMS = {
 
   // --- User (Customer) Dashboard Menu ---
   user: [
-    { title: "My Profile", path: "/user", icon: UserCircle },
-    { title: "My Orders", path: "/user/orders", icon: ShoppingBag },
+
+    { title: "Dashboard", path: "/user", icon: LayoutDashboard},
+    { title: "My Profile", path: "/user/user-profile", icon: UserCircle },
+    { title: "My Orders", path: "/user/my-orders", icon: ShoppingBag },
     { title: "Wishlist", path: "/user/wishlist", icon: Heart },
     { title: "My Reviews", path: "/user/reviews", icon: Star },
     { title: "Payment Methods", path: "/user/payments", icon: CreditCard },
