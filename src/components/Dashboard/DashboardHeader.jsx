@@ -6,6 +6,7 @@ import { Menu, Bell, Search, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import SearchBar from "../layout/SearchBar";
 import UserMenu from "../layout/UserMenu";
+import BrandLogo from "../common/BrandLogo"; 
 
 export default function DashboardHeader({ toggleSidebar, role }) {
   const { data: session } = useSession();
@@ -24,6 +25,11 @@ export default function DashboardHeader({ toggleSidebar, role }) {
             <Menu size={24} />
           </button>
           
+         
+          <div className="md:hidden">
+            <BrandLogo width={120} height={40} />
+          </div>
+          
           <div className="hidden sm:block">
             <h1 className="text-xl font-bold text-[var(--text-primary)] tracking-tight capitalize">
               {role} Panel
@@ -39,7 +45,6 @@ export default function DashboardHeader({ toggleSidebar, role }) {
         {/* --- Right Section --- */}
         <div className="flex items-center gap-2 sm:gap-6 shrink-0">
           
-          {/* Mobile Search Toggle Button (Only visible on Mobile) */}
           <button 
             onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
             className="lg:hidden p-2.5 rounded-xl hover:bg-[var(--background)] text-[var(--text-secondary)]"
@@ -47,7 +52,6 @@ export default function DashboardHeader({ toggleSidebar, role }) {
             <Search size={22} />
           </button>
 
-          {/* Notifications */}
           <button className="relative p-2.5 rounded-xl hover:bg-[var(--background)] text-[var(--text-secondary)]">
             <Bell size={22} />
             <span className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 border-2 border-[var(--surface)] rounded-full"></span>
@@ -55,18 +59,17 @@ export default function DashboardHeader({ toggleSidebar, role }) {
 
           <div className="hidden sm:block h-8 w-[1px] bg-[var(--border)]"></div>
 
-          {/* User Menu */}
           <div className="flex items-center gap-3">
             <UserMenu user={session?.user} />
           </div>
         </div>
       </div>
 
-      {/* --- Mobile Search Overlay (Animated) --- */}
+      {/* --- Mobile Search Overlay --- */}
       {isMobileSearchOpen && (
         <div className="absolute top-0 left-0 w-full h-20 bg-[var(--surface)] flex items-center px-4 z-[70] lg:hidden animate-in slide-in-from-top duration-300">
           <div className="flex-1">
-             <SearchBar /> {/* Reusing your search bar */}
+             <SearchBar /> 
           </div>
           <button 
             onClick={() => setIsMobileSearchOpen(false)}

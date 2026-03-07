@@ -1,7 +1,5 @@
-
-
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Search, Heart, ShoppingCart, Bell, Menu, X, LayoutGrid } from "lucide-react";
 import BrandLogo from "../common/BrandLogo";
@@ -13,6 +11,18 @@ export default function Navbar() {
   const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const searchRef = useRef(null);
+
+  // search bar close click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowMobileSearch(false);
+      }
+    };
+    if (showMobileSearch) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMobileSearch]);
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
@@ -78,54 +88,38 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Search Bar with Close (X) Button */}
+        {/* Mobile Search Bar with Auto-Close Logic */}
         {showMobileSearch && (
-          <div className="md:hidden pb-4 flex items-center gap-2 animate-in slide-in-from-top-2 duration-300 px-2">
-            <div className="flex-1"><SearchBar /></div>
-            <button 
-              onClick={() => setShowMobileSearch(false)}
-              className="p-2 bg-[var(--surface)] border border-[var(--border)] rounded-xl text-red-500 active:scale-90 transition-all"
-            >
-              <X size={20} />
-            </button>
+          <div ref={searchRef} className="md:hidden pb-4 animate-in slide-in-from-top-2 duration-300 px-2">
+            <SearchBar onClose={() => setShowMobileSearch(false)} />
           </div>
         )}
       </div>
 
       {/* Desktop Category Nav Line */}
-<div className="hidden md:block border-t border-[var(--border)]/40 w-full"> 
-  <div className="max-w-[1400px] mx-auto px-6">
-     <CategoryNav />
-  </div>
-</div>
+      <div className="hidden md:block border-t border-[var(--border)]/40 w-full"> 
+        <div className="max-w-[1400px] mx-auto px-6">
+          <CategoryNav />
+        </div>
+      </div>
 
       {/* Full Screen Mobile Drawer for Categories */}
       <div className={`md:hidden fixed inset-y-0 left-0 z-50 w-full transform transition-transform duration-500 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>
         <div className="relative w-[300px] h-full bg-[var(--background)] shadow-2xl flex flex-col border-r border-[var(--border)]">
           
-          {/* Drawer Header */}
-         <div className="p-6 border-b border-[var(--border)] flex items-center justify-between bg-[var(--background)]">
-  {/* Left: Title & Icon */}
-  <div className="flex items-center gap-3">
-    <div className="p-2 bg-[var(--secondary)]/10 rounded-lg">
-      <LayoutGrid size={20} className="text-[var(--secondary)]" />
-    </div>
-    <h2 className="font-bold text-lg uppercase tracking-tight text-[var(--text-primary)]">
-      Browse Shop
-    </h2>
-  </div>
+          <div className="p-6 border-b border-[var(--border)] flex items-center justify-between bg-[var(--background)]">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-[var(--secondary)]/10 rounded-lg">
+                <LayoutGrid size={20} className="text-[var(--secondary)]" />
+              </div>
+              <h2 className="font-bold text-lg uppercase tracking-tight text-[var(--text-primary)]">Browse Shop</h2>
+            </div>
+            <button onClick={() => setIsMenuOpen(false)} className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border)]/50 rounded-lg transition-all active:scale-95">
+              <X size={22} />
+            </button>
+          </div>
 
-  {/* Right: Close Button */}
-  <button 
-    onClick={() => setIsMenuOpen(false)} 
-    className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border)]/50 rounded-lg transition-all active:scale-95"
-  >
-    <X size={22} />
-  </button>
-</div>
-
-          {/* Category List Scrollable */}
           <div className="flex-1 overflow-y-auto p-4 py-6 no-scrollbar">
             <CategoryNav isMobile={true} closeMenu={() => setIsMenuOpen(false)} />
           </div>
