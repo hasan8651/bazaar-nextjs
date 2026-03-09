@@ -1,80 +1,61 @@
 "use client";
-
 import { useState } from "react";
-import { Menu, X, Cpu, Shirt, ShoppingCart, Home, Heart, Smartphone, Activity, PlusCircle, Tag, Package, Headphones, CornerUpLeft, Gift, Star, Award } from "lucide-react";
+import { Menu, X, Cpu, Shirt, ShoppingCart, Home, Heart, Smartphone, Tag, Star } from "lucide-react";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
 
+  // এটি সহজেই Backend থেকে লুপ করে আনা যাবে
+  const categories = [
+    { name: "Electronics", icon: Cpu },
+    { name: "Fashion", icon: Shirt },
+    { name: "Grocery", icon: ShoppingCart },
+    { name: "Home & Living", icon: Home },
+    { name: "Beauty", icon: Heart },
+  ];
+
   return (
     <>
-      {/* Hamburger Icon */}
-      <button 
-        onClick={() => setOpen(true)} 
-        className="md:hidden"
-        style={{ color: "var(--text-primary)" }} 
-      >
-        <Menu size={28} />
+      <button onClick={() => setOpen(true)} className="md:hidden p-1 text-[var(--text-primary)] hover:bg-[var(--surface)] rounded-lg transition-colors">
+        <Menu size={26} />
       </button>
 
-      {/* Sidebar Overlay */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black/40 md:hidden">
-          {/* Sidebar Content */}
-          <div 
-            className="w-64 h-full shadow-lg p-5 flex flex-col transition-colors duration-300"
-            style={{ 
-              backgroundColor: "var(--background)", 
-              color: "var(--text-primary)" 
-            }}
-          >
+        <div className="fixed inset-0 z-[100] md:hidden">
+          {/* Overlay with blur */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          
+          <div className="absolute top-0 left-0 w-[280px] h-full bg-[var(--background)] shadow-2xl flex flex-col animate-in slide-in-from-left duration-500">
+            <div className="p-6 flex flex-col h-full">
+              
+              <div className="flex items-center justify-between mb-10">
+                <span className="font-black text-xl italic tracking-tighter text-[var(--secondary)]">PrimeMart</span>
+                <button onClick={() => setOpen(false)} className="p-2 rounded-xl bg-[var(--surface)] text-[var(--text-primary)]">
+                  <X size={20} />
+                </button>
+              </div>
 
-            {/* Close Button */}
-            <button 
-              onClick={() => setOpen(false)} 
-              className="mb-4 w-fit"
-              style={{ color: "var(--text-primary)" }}
-            >
-              <X size={26} />
-            </button>
+              <div className="space-y-8 overflow-y-auto">
+                <section>
+                  <h3 className="text-[10px] uppercase font-black tracking-widest text-gray-400 mb-5">Explore Categories</h3>
+                  <ul className="space-y-3">
+                    {categories.map((item) => (
+                      <li key={item.name} className="group flex items-center gap-4 p-3 rounded-2xl hover:bg-[var(--secondary)]/5 cursor-pointer transition-all">
+                        <div className="p-2.5 rounded-xl bg-[var(--surface)] text-[var(--secondary)] group-hover:bg-[var(--secondary)] group-hover:text-white transition-all">
+                          <item.icon size={18}/>
+                        </div>
+                        <span className="text-sm font-bold text-[var(--text-primary)]">{item.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
 
-            {/* Categories */}
-            <div>
-              <h2 className="font-semibold text-lg pb-2 border-b" style={{ borderColor: "var(--border)" }}>
-                Categories
-              </h2>
-              <ul className="mt-2 space-y-2 font-medium" style={{ color: "var(--text-secondary)" }}>
-                <li className="flex items-center gap-3"><Cpu size={18}/> Electronics</li>
-                <li className="flex items-center gap-3"><Shirt size={18}/> Fashion</li>
-                <li className="flex items-center gap-3"><ShoppingCart size={18}/> Grocery</li>
-                <li className="flex items-center gap-3"><Home size={18}/> Home & Living</li>
-                <li className="flex items-center gap-3"><Heart size={18}/> Beauty</li>
-                <li className="flex items-center gap-3"><Smartphone size={18}/> Mobile & Accessories</li>
-                <li className="flex items-center gap-3"><Activity size={18}/> Sports & Outdoors</li>
-                <li className="flex items-center gap-3"><PlusCircle size={18}/> Health & Beauty</li>
-              </ul>
+              <div className="mt-auto pt-6 border-t border-[var(--border)] text-center">
+                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Powered by PrimeMart v2.0</p>
+              </div>
             </div>
-
-            {/* Quick Links */}
-            <div className="mt-6">
-              <h2 className="font-semibold text-lg pb-2 border-b" style={{ borderColor: "var(--border)" }}>
-                Quick Links
-              </h2>
-              <ul className="mt-2 space-y-2 font-medium" style={{ color: "var(--text-secondary)" }}>
-                <li className="flex items-center gap-3"><Tag size={18}/> Offers / Deals</li>
-                <li className="flex items-center gap-3"><Package size={18}/> Track Orders</li>
-                <li className="flex items-center gap-3"><Headphones size={18}/> Customer Support</li>
-                <li className="flex items-center gap-3"><CornerUpLeft size={18}/> Returns & Refunds</li>
-                <li className="flex items-center gap-3"><Gift size={18}/> Gift Cards</li>
-                <li className="flex items-center gap-3"><Star size={18}/> New Arrivals</li>
-                <li className="flex items-center gap-3"><Award size={18}/> Top Brands</li>
-              </ul>
-            </div>
-
           </div>
-
-          {/* outside click menu close  */}
-          <div className="flex-1" onClick={() => setOpen(false)}></div>
         </div>
       )}
     </>

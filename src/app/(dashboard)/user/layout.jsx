@@ -25,7 +25,7 @@ export default function UserLayout({ children }) {
     <div className="flex min-h-screen bg-[var(--background)] transition-colors duration-300">
       {/* --- Sidebar Section --- */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 transition-transform duration-300 transform 
+        className={`fixed inset-y-0 left-0 z-50 w-72 transition-transform duration-300 transform 
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         md:relative md:translate-x-0 shadow-2xl md:shadow-none`}
       >
