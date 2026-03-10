@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  /* Tailwind v4 এ ভ্যারিয়েবলগুলো এখানে রেজিস্টার করতে হবে */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-base: var(--border);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+}
+
 
 :root {
     --primary: #111827;
