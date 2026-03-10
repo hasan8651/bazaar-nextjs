@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react";
 import { Search, Mic, X } from "lucide-react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import { useRouter } from "next/navigation";
 
 export default function SearchBar({ onClose }) {
   const [isMounted, setIsMounted] = useState(false); 
   const { listening, resetTranscript, transcript } = useSpeechRecognition();
   const [searchTerm, setSearchTerm] = useState("");
-
+ const router = useRouter()
 
   useEffect(() => {
     setIsMounted(true);
@@ -24,11 +25,13 @@ export default function SearchBar({ onClose }) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
-    console.log("Searching for:", searchTerm);
-    setSearchTerm("");
-    resetTranscript();
-    SpeechRecognition.stopListening();
-    if (onClose) onClose();
+
+  // সার্চ টার্মটিকে ইউআরএলের মাধ্যমে সার্চ পেজে পাঠাচ্ছি
+router.push(`/search_page?q=${searchTerm}`);
+
+  // সার্চবার পরিষ্কার করা
+  setSearchTerm("");
+  if (onClose) onClose();
   };
 
   // 
