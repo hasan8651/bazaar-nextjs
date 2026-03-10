@@ -20,6 +20,7 @@ export default function UserMenu({ user }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+
   // dashboard path condition
   const dashboardPath = user?.role === "seller" ? "/seller" : "/user";
 

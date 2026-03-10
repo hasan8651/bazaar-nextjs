@@ -62,8 +62,13 @@ export const authOptions = {
       session.accessToken = token.accessToken;
       session.user.role = token.role;
       session.user.id = token.id;
+    
       return session;
+
+
     },
+
+    
   },
   pages: {
     signIn: "/login",

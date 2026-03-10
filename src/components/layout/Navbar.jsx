@@ -10,7 +10,6 @@ export default function Navbar() {
   const { data: session } = useSession();
   const user = session?.user; 
 
-
   return (
     <nav className="sticky top-0 z-50 shadow-md py-4 transition-all duration-300 border-b"
       style={{ 
