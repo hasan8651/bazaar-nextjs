@@ -41,7 +41,7 @@ export default function Sidebar({ role }) {
   };
 
   return (
-    <aside className="hidden md:flex md:flex-col md:w-72 bg-[var(--surface)] border-r border-[var(--border)] h-screen sticky top-0 transition-all duration-300">
+    <aside className="flex flex-col w-72 bg-[var(--surface)] border-r border-[var(--border)] h-screen sticky top-0 transition-all duration-300">
       {/* 1. Brand / Logo Section */}
       <div className="p-6 border-b border-[var(--border)] h-24 flex items-center">
         <div className="flex flex-col gap-1">
@@ -74,8 +74,9 @@ export default function Sidebar({ role }) {
           >
             {user.isAuthenticated && user.avatarUrl ? (
               <img
-                src={user.avatarUrl}
+                src={session?.user?.image || user.avatarUrl}
                 alt={user.name}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
             ) : (
