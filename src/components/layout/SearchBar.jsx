@@ -1,71 +1,96 @@
 "use client";
+import { useState, useEffect } from "react";
+import { Search, Mic, X } from "lucide-react";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
-import { Search } from "lucide-react";
-import { useState } from "react";
+export default function SearchBar({ onClose }) {
+  const [isMounted, setIsMounted] = useState(false); 
+  const { listening, resetTranscript, transcript } = useSpeechRecognition();
+  const [searchTerm, setSearchTerm] = useState("");
 
-export default function SearchBar() {
-  const [selected, setSelected] = useState("All");
 
-  const categories = [
-    "All",
-    "Electronics",
-    "Fashion",
-    "Grocery",
-    "Home & Living",
-    "Beauty",
-    "Mobile",
-  ];
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (transcript) setSearchTerm(transcript);
+  }, [transcript]);
+
+  useEffect(() => {
+    if (searchTerm === "") resetTranscript();
+  }, [searchTerm, resetTranscript]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    console.log("Searching for:", searchTerm);
+    setSearchTerm("");
+    resetTranscript();
+    SpeechRecognition.stopListening();
+    if (onClose) onClose();
+  };
+
+  // 
+  if (!isMounted) return <div className="h-11 w-full bg-transparent" />; 
 
   return (
-    <div 
-      className="w-full flex items-center border rounded-full shadow-sm overflow-hidden transition-all duration-300"
-      style={{ 
-        backgroundColor: "var(--background)", 
-        borderColor: "var(--border)" 
-      }}
-    >
-
-      {/* Category Dropdown */}
-      <select
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
-        className="hidden md:flex items-center h-12 px-5 text-sm border-r outline-none cursor-pointer transition"
-        style={{ 
-          backgroundColor: "var(--surface)", 
-          borderColor: "var(--border)",
-          color: "var(--text-primary)"
-        }}
+    <div className="flex items-center gap-2 w-full">
+      <form 
+        onSubmit={handleSearch}
+        className="flex-1 flex items-center bg-[var(--surface)] border border-[var(--border)] rounded-full h-11 shadow-sm overflow-hidden focus-within:ring-2 ring-[var(--secondary)]/20 transition-all"
       >
-        {categories.map((cat) => (
-          <option key={cat} value={cat} 
-          style={{ 
-        backgroundColor: "var(--background)", 
-        color: "var(--text-primary)" 
-      }}
-          className="bg-white dark:bg-[#1e293b]">
-            {cat}
-          </option>
-        ))}
-      </select>
+        <div className="pl-4 text-[var(--text-secondary)] shrink-0">
+          <Search size={18} />
+        </div>
 
-      {/* Input Field */}
-      <input
-        type="text"
-        placeholder="Search for products..."
-        className="flex-1 px-5 text-sm h-12 outline-none transition-all"
-        style={{ 
-          backgroundColor: "var(--background)", 
-          color: "var(--text-primary)"
-        }}
-      />
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search products..."
+          className="flex-1 px-3 h-full bg-transparent outline-none text-sm text-[var(--text-primary)] min-w-0"
+        />
+        
+        {/* Mic & X Group */}
+        <div className="flex items-center">
+          {searchTerm && !listening && (
+            <button type="button" onClick={() => {setSearchTerm(""); resetTranscript();}} className="p-2 text-gray-400 hover:text-red-500 transition-colors">
+              <X size={18} />
+            </button>
+          )}
 
-      {/* Search button */}
-      <button 
-        className="h-12 w-14 flex justify-center items-center hover:opacity-90 transition text-white"
-        style={{ backgroundColor: "var(--secondary)" }}
-      >
-        <Search size={20} />
-      </button>
+          <button 
+            type="button"
+            onClick={() => {
+              if (listening) { SpeechRecognition.stopListening(); } 
+              else { resetTranscript(); setSearchTerm(""); SpeechRecognition.startListening({ continuous: true }); }
+            }}
+            className={`px-3 transition-colors ${listening ? 'text-red-500' : 'text-gray-400'}`}
+          >
+            {listening ? <X size={18} className="animate-pulse" /> : <Mic size={18} />}
+          </button>
+        </div>
+
+        {/* Search Button */}
+        <button 
+          type="submit"
+          className="hidden md:flex items-center justify-center h-full px-8 bg-[var(--secondary)] text-white font-semibold text-sm hover:bg-[var(--secondary)]/90 active:scale-[0.98] transition-all duration-300"
+        >
+          Search
+        </button>
+      </form>
+
+      {/* Mobile close btn */}
+      {onClose && (
+        <button 
+          type="button"
+          onClick={() => { onClose(); }}
+          className="p-2 text-[var(--text-primary)] md:hidden"
+        >
+          <X size={24} />
+        </button>
+      )}
     </div>
   );
 }
