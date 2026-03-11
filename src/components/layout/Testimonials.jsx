@@ -33,18 +33,18 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-8 bg-[var(--background)] transition-colors duration-300">
+    <section className="py-8 bg-(--background) transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header Section */}
         <div className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 mb-4 text-[10px] font-black uppercase tracking-[0.4em] text-[var(--secondary)] bg-[var(--secondary)]/10 rounded-full">
+          <span className="inline-block px-4 py-1.5 mb-4 text-[10px] font-black uppercase tracking-[0.4em] text-(--secondary) bg-(--secondary)/10 rounded-full">
             Wall of Love
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tighter">
-            HEAR FROM OUR <span className="text-[var(--secondary)] italic">COMMUNITY</span>
+          <h2 className="text-4xl md:text-6xl font-black text-(--text-primary) tracking-tighter">
+            HEAR FROM OUR <span className="text-(--secondary) italic">COMMUNITY</span>
           </h2>
-          <p className="mt-6 text-lg text-[var(--text-secondary)] max-w-2xl mx-auto opacity-70 font-medium italic">
+          <p className="mt-6 text-lg text-(--text-secondary) max-w-2xl mx-auto opacity-70 font-medium italic">
             "At Prime Mart, customer satisfaction isn't just a goal—it's our standard."
           </p>
         </div>
@@ -54,11 +54,11 @@ export default function Testimonials() {
           {testimonials.map((t) => (
             <div 
               key={t.id}
-              className="relative p-10 rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] shadow-sm hover:shadow-2xl hover:shadow-[var(--secondary)]/10 transition-all duration-500 group hover:-translate-y-3 overflow-hidden"
+              className="relative p-10 rounded-[2.5rem] bg-(--surface) border border-(--border) shadow-sm hover:shadow-2xl hover:shadow-(--secondary)/10 transition-all duration-500 group hover:-translate-y-3 overflow-hidden"
             >
               {/* Decorative Background Quote */}
               <div className="absolute -top-4 -right-2 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500 transform rotate-12">
-                <Quote size={120} className="text-[var(--text-primary)]" />
+                <Quote size={120} className="text-(--text-primary)" />
               </div>
 
               {/* Rating Stars */}
@@ -73,23 +73,23 @@ export default function Testimonials() {
               </div>
 
               {/* Review Text */}
-              <p className="text-[var(--text-primary)] text-lg leading-relaxed mb-10 font-medium relative z-10">
+              <p className="text-(--text-primary) text-lg leading-relaxed mb-10 font-medium relative z-10">
                 "{t.comment}"
               </p>
 
               {/* User Identity Section */}
-              <div className="flex items-center gap-5 mt-auto border-t border-[var(--border)] pt-8">
+              <div className="flex items-center gap-5 mt-auto border-t border-(--border) pt-8">
                 <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[var(--secondary)] rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                  <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-(--secondary) rotate-3 group-hover:rotate-0 transition-transform duration-500">
                     <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 bg-[var(--secondary)] w-5 h-5 rounded-full flex items-center justify-center border-2 border-[var(--surface)]">
+                  <div className="absolute -bottom-1 -right-1 bg-(--secondary) w-5 h-5 rounded-full flex items-center justify-center border-2 border-(--surface)">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-black text-[var(--text-primary)] text-base tracking-tight">{t.name}</h4>
-                  <p className="text-[var(--text-secondary)] text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">
+                  <h4 className="font-black text-(--text-primary) text-base tracking-tight">{t.name}</h4>
+                  <p className="text-(--text-secondary) text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">
                     {t.role}
                   </p>
                 </div>
@@ -100,8 +100,8 @@ export default function Testimonials() {
 
         {/* Brand Mention Footer */}
         <div className="mt-20 text-center">
-          <p className="text-[var(--text-secondary)] text-sm font-bold uppercase tracking-widest opacity-40">
-            Join 50k+ Happy Customers at <span className="text-[var(--text-primary)]">Prime Mart</span>
+          <p className="text-(--text-secondary) text-sm font-bold uppercase tracking-widest opacity-40">
+            Join 50k+ Happy Customers at <span className="text-(--text-primary)">Prime Mart</span>
           </p>
         </div>
       </div>

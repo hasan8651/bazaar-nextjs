@@ -26,14 +26,14 @@ const allCategories = [
 
 export default function AllCategories() {
   return (
-    <main className="min-h-screen bg-[var(--background)] py-12 md:py-24 transition-colors duration-300">
+    <main className="min-h-screen bg-(--background) py-12 md:py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Button - Left aligned */}
         <div className="flex justify-start mb-10 md:mb-12">
           <Link
             href="/"
-            className="flex items-center gap-2 px-6 py-3 bg-[var(--surface)] border border-[var(--border)] rounded-full text-[var(--secondary)] font-semibold text-sm shadow-sm transition-all duration-300 hover:bg-[var(--secondary)] hover:text-white hover:shadow-lg hover:shadow-[var(--secondary)]/20 group"
+            className="flex items-center gap-2 px-6 py-3 bg-(--surface) border border-(--border) rounded-full text-(--secondary) font-semibold text-sm shadow-sm transition-all duration-300 hover:bg-(--secondary) hover:text-white hover:shadow-lg hover:shadow-(--secondary)/20 group"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             Back to Home
@@ -42,10 +42,10 @@ export default function AllCategories() {
 
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--primary)]">
-            All <span className="text-[var(--secondary)]">Categories</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-(--primary)">
+            All <span className="text-(--secondary)">Categories</span>
           </h1>
-          <p className="mt-4 text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
+          <p className="mt-4 text-lg text-(--text-secondary) max-w-3xl mx-auto">
             Discover our complete range — from everyday essentials to premium collections. Find exactly what you're looking for.
           </p>
         </div>
@@ -58,13 +58,13 @@ export default function AllCategories() {
               href={`/categories/${cat.name.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-')}`}
               className={`
                 group relative block overflow-hidden rounded-xl 
-                bg-[var(--surface)] border border-[var(--border)] 
+                bg-(--surface) border border-(--border) 
                 transition-all duration-300 ease-out
-                hover:border-[var(--secondary)]/40 hover:shadow-xl hover:-translate-y-1
+                hover:border-(--secondary)/40 hover:shadow-xl hover:-translate-y-1
               `}
             >
               {/* Image + Overlay */}
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-4/3 overflow-hidden">
                 <img
                   src={cat.image || `https://placehold.co/600x450/0EA5A4/white?text=${cat.name}`} // fallback placeholder
                   alt={cat.name}
@@ -72,7 +72,7 @@ export default function AllCategories() {
                   loading="lazy"
                 />
                 <div className={`
-                  absolute inset-0 bg-gradient-to-t 
+                  absolute inset-0 bg-linear-to-t 
                   from-black/60 via-black/25 to-transparent 
                   transition-all duration-300 
                   group-hover:from-black/82 group-hover:via-black/48
@@ -80,11 +80,11 @@ export default function AllCategories() {
               </div>
 
               {/* Text Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-gradient-to-t from-black/70 to-transparent pointer-events-none">
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-linear-to-t from-black/70 to-transparent pointer-events-none">
                 <h3 className={`
                   text-xl md:text-2xl font-semibold 
                   text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)] 
-                  group-hover:text-[var(--secondary)] 
+                  group-hover:text-(--secondary) 
                   transition-colors duration-300
                 `}>
                   {cat.name}
@@ -99,7 +99,7 @@ export default function AllCategories() {
                 <div className={`
                   flex items-center justify-center w-10 h-10 rounded-full 
                   bg-white/20 backdrop-blur-sm border border-white/30 
-                  text-[var(--secondary)] shadow-md
+                  text-(--secondary) shadow-md
                 `}>
                   <ArrowRight size={20} />
                 </div>
@@ -112,7 +112,7 @@ export default function AllCategories() {
         <div className="mt-16 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[var(--secondary)] text-white font-semibold text-lg rounded-full shadow-md hover:bg-[var(--secondary)]/90 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-(--secondary) text-white font-semibold text-lg rounded-full shadow-md hover:bg-(--secondary)/90 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
           >
             Browse All Products
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

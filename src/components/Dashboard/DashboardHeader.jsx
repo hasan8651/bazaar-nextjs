@@ -1,4 +1,3 @@
-// src/components/dashboard/DashboardHeader.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -13,14 +12,14 @@ export default function DashboardHeader({ toggleSidebar, role }) {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false); 
 
   return (
-    <header className="bg-[var(--surface)] border-b border-[var(--border)] sticky top-0 z-[60] h-20 flex items-center shadow-sm">
+    <header className="bg-(--surface) border-b border-(--border) sticky top-0 z-60 h-20 flex items-center shadow-sm">
       <div className="flex items-center justify-between w-full px-4 md:px-8 gap-4">
         
         {/* --- Left Section --- */}
         <div className="flex items-center gap-4 shrink-0">
           <button 
             onClick={toggleSidebar}
-            className="p-2 rounded-xl hover:bg-[var(--background)] md:hidden text-[var(--text-primary)] transition-colors"
+            className="p-2 rounded-xl hover:bg-(--background) md:hidden text-(--text-primary) transition-colors"
           >
             <Menu size={24} />
           </button>
@@ -31,7 +30,7 @@ export default function DashboardHeader({ toggleSidebar, role }) {
           </div>
           
           <div className="hidden sm:block">
-            <h1 className="text-xl font-bold text-[var(--text-primary)] tracking-tight capitalize">
+            <h1 className="text-xl font-bold text-(--text-primary) tracking-tight capitalize">
               {role} Panel
             </h1>
           </div>
@@ -47,17 +46,17 @@ export default function DashboardHeader({ toggleSidebar, role }) {
           
           <button 
             onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-            className="lg:hidden p-2.5 rounded-xl hover:bg-[var(--background)] text-[var(--text-secondary)]"
+            className="lg:hidden p-2.5 rounded-xl hover:bg-(--background) text-(--text-secondary)"
           >
             <Search size={22} />
           </button>
 
-          <button className="relative p-2.5 rounded-xl hover:bg-[var(--background)] text-[var(--text-secondary)]">
+          <button className="relative p-2.5 rounded-xl hover:bg-(--background) text-(--text-secondary)">
             <Bell size={22} />
-            <span className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 border-2 border-[var(--surface)] rounded-full"></span>
+            <span className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 border-2 border-(--surface) rounded-full"></span>
           </button>
 
-          <div className="hidden sm:block h-8 w-[1px] bg-[var(--border)]"></div>
+          <div className="hidden sm:block h-8 w-px bg-(--border)"></div>
 
           <div className="flex items-center gap-3">
             <UserMenu user={session?.user} />
@@ -67,13 +66,13 @@ export default function DashboardHeader({ toggleSidebar, role }) {
 
       {/* --- Mobile Search Overlay --- */}
       {isMobileSearchOpen && (
-        <div className="absolute top-0 left-0 w-full h-20 bg-[var(--surface)] flex items-center px-4 z-[70] lg:hidden animate-in slide-in-from-top duration-300">
+        <div className="absolute top-0 left-0 w-full h-20 bg-(--surface) flex items-center px-4 z-70 lg:hidden animate-in slide-in-from-top duration-300">
           <div className="flex-1">
              <SearchBar /> 
           </div>
           <button 
             onClick={() => setIsMobileSearchOpen(false)}
-            className="ml-2 p-2 text-[var(--text-secondary)]"
+            className="ml-2 p-2 text-(--text-secondary)"
           >
             <X size={24} />
           </button>

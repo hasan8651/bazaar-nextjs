@@ -15,8 +15,8 @@ const statusOptions = ["In Stock", "Out of Stock", "Coming Soon"];
 const SectionTitle = ({ icon, title }) => (
   <div className="flex items-center gap-2.5 mb-5 mt-8 first:mt-0">
     <span className="text-base">{icon}</span>
-    <h2 className="text-sm font-bold uppercase tracking-widest text-[#1E293B]">{title}</h2>
-    <div className="flex-1 h-px bg-[#E2E8F0]" />
+    <h2 className="text-sm font-bold uppercase tracking-widest text-(--text-primary)">{title}</h2>
+    <div className="flex-1 h-px bg-(--text-primary)" />
   </div>
 );
 
@@ -72,16 +72,16 @@ export default function ProductForm() {
 
   console.log(submittedData)
 
-  const inputBase = "w-full px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 outline-none bg-white focus:ring-2 focus:ring-[#0EA5A4]/30 focus:border-[#0EA5A4] placeholder:text-slate-300";
-  const inputNormal = `${inputBase} border-[#E2E8F0] text-[#1E293B]`;
+  const inputBase = "w-full px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 outline-none bg-(--surface) focus:ring-2 focus:ring-[#0EA5A4]/20 focus:border-[#0EA5A4] placeholder:text-slate-400";
+  const inputNormal = `${inputBase} border-[#E2E8F0] text-(--text-primary)`;
   const inputError = `${inputBase} border-red-400 focus:ring-red-200 focus:border-red-400 bg-red-50/40`;
   const labelBase = "block text-xs font-semibold uppercase tracking-widest mb-2 text-[#64748B]";
   const errorText = "mt-1.5 text-xs text-red-500 font-medium flex items-center gap-1";
 
   if (submitted && submittedData) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6">
-        <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl p-10 text-center border border-[#E2E8F0]">
+      <div className="min-h-screen bg-(--background) flex items-center justify-center p-6">
+        <div className="w-full max-w-2xl bg-(--background) rounded-3xl shadow-xl p-10 text-center border border-[#E2E8F0]">
           <div className="w-20 h-20 rounded-full bg-[#10B981]/10 flex items-center justify-center mx-auto mb-6">
             <svg className="w-10 h-10 text-[#10B981]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -107,15 +107,15 @@ export default function ProductForm() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-start justify-center p-6 py-12">
+    <div className="min-h-screen bg-(--background) flex items-start justify-center px-6 py-2">
       <div className="w-full max-w-4xl">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-[#1E293B]">Add New Product</h1>
-          <p className="text-sm text-[#64748B]">Enter the details to create your listing.</p>
+          <h1 className="text-3xl font-bold mb-2 text-(--secondary)">Add New Product</h1>
+          <p className="text-sm text-(--text-primary)">Enter the details to create your listing.</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E2E8F0]/60">
+          <div className="bg-(--background) rounded-3xl shadow-xl overflow-hidden border border-[#E2E8F0]/60">
             <div className="h-1.5 bg-[#0EA5A4]" />
             <div className="p-8 md:p-10">
 
@@ -236,8 +236,8 @@ export default function ProductForm() {
               </div>
 
               <div className="flex justify-end gap-3 pt-6 border-t">
-                <button type="button" onClick={handleReset} className="px-6 py-2 font-semibold text-gray-500 hover:text-gray-800 transition-colors">Reset</button>
-                <button type="submit" disabled={isSubmitting} className="px-10 py-3 bg-[#0EA5A4] text-white rounded-xl font-bold shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50">
+                <button type="button" onClick={handleReset} className="px-13 md:px-17 py-2 font-semibold btn-secondary rounded-2xl transition-colors cursor-pointer">Reset</button>
+                <button type="submit" disabled={isSubmitting} className="px-6 md:px-10 py-3 bg-[#0EA5A4] text-white rounded-xl font-bold shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 cursor-pointer">
                   {isSubmitting ? "Saving..." : "Save Product"}
                 </button>
               </div>

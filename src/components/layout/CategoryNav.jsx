@@ -31,17 +31,17 @@ if (isMobile) {
           key={cat.name}
           href={cat.href}
           onClick={closeMenu}
-          className="flex items-center justify-between p-3 rounded-xl bg-[var(--background)] border border-[var(--border)] hover:bg-[var(--secondary)]/10 hover:border-[var(--secondary)] transition-all group"
+          className="flex items-center justify-between p-3 rounded-xl bg-(--background) border border-(--border) hover:bg-(--secondary)/10 hover:border-(--secondary) transition-all group"
         >
         
-          <span className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wide">
+          <span className="text-sm font-bold text-(--text-primary) uppercase tracking-wide">
             {cat.name}
           </span>
           
        
           <ChevronRight 
             size={16} 
-            className="text-[var(--text-secondary)] group-hover:text-[var(--secondary)] transition-colors" 
+            className="text-(--text-secondary) group-hover:text-(--secondary) transition-colors" 
           />
         </Link>
       ))}
@@ -49,7 +49,7 @@ if (isMobile) {
       <Link
         href="/categories"
         onClick={closeMenu}
-        className="flex items-center justify-center gap-2 p-4 mt-2 bg-[var(--secondary)] text-white rounded-xl font-black text-xs uppercase tracking-[0.1em] shadow-lg shadow-[var(--secondary)]/20 hover:opacity-90 transition-all"
+        className="flex items-center justify-center gap-2 p-4 mt-2 bg-(--secondary) text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-(--secondary)/20 hover:opacity-90 transition-all"
       >
         <LayoutGrid size={16} />
         View All Categories
@@ -72,8 +72,8 @@ if (isMobile) {
   href={cat.href}
   className={`relative whitespace-nowrap text-[12px] uppercase tracking-widest transition-all duration-300
     ${active 
-      ? "text-[var(--secondary)]" 
-      : "text-[var(--text-secondary)] hover:text-[var(--secondary)]"
+      ? "text-(--secondary)" 
+      : "text-(--text-secondary) hover:text-(--secondary)"
     }
   `}
 >
@@ -84,7 +84,7 @@ if (isMobile) {
 
   {/* Smooth Underline */}
   <span 
-    className={`absolute -bottom-1 left-0 h-[2px] bg-[var(--secondary)] transition-all duration-300 ease-out
+    className={`absolute -bottom-1 left-0 h-0.5 bg-(--secondary) transition-all duration-300 ease-out
     ${active ? "w-full" : "w-0 group-hover:w-full"}`}
   ></span>
 </Link>
@@ -93,11 +93,11 @@ if (isMobile) {
     </div>
 
     {/* Sticky ALL button */}
-    <div className="absolute right-0 top-0 bottom-0 flex items-center pr-4 lg:pr-8 bg-gradient-to-l from-[var(--background)] via-[var(--background)] to-transparent pl-10 pointer-events-none">
+    <div className="absolute right-0 top-0 bottom-0 flex items-center pr-4 lg:pr-8 bg-linear-to-l from-(--background) via-(--background) to-transparent pl-10 pointer-events-none">
       <div className="pointer-events-auto">
         <Link
           href="/categories"
-          className="flex items-center gap-2 px-5 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all whitespace-nowrap"
+          className="flex items-center gap-2 px-5 py-1.5 bg-(--secondary) text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all whitespace-nowrap"
         >
           <LayoutGrid size={15} />
           ALL

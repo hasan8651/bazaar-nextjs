@@ -49,8 +49,8 @@ export default function Footer() {
                         <h3 className="text-lg font-bold mb-6 tracking-tight">Quick Links</h3>
                         <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
                             <li><Link href="/" className="hover:text-[var(--secondary)] transition-colors">Home</Link></li>
-                            <li><Link href="/shop" className="hover:text-[var(--secondary)] transition-colors">All Products</Link></li>
-                            <li><Link href="/about" className="hover:text-[var(--secondary)] transition-colors">About Us</Link></li>
+                            <li><Link href="/shop" className="hover:text-(--secondary) transition-colors">All Products</Link></li>
+                            <li><Link href="/about" className="hover:text-(--secondary) transition-colors">About Us</Link></li>
                         </ul>
                     </div>
 
@@ -58,9 +58,9 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-bold mb-6 tracking-tight">Support</h3>
                         <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                            <li><Link href="/contact" className="hover:text-[var(--secondary)] transition-colors">Contact Us</Link></li>
-                            <li><Link href="/privacy" className="hover:text-[var(--secondary)] transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="/terms" className="hover:text-[var(--secondary)] transition-colors">Terms & Conditions</Link></li>
+                            <li><Link href="/contact" className="hover:text-(--secondary) transition-colors">Contact Us</Link></li>
+                            <li><Link href="/privacy" className="hover:text-(--secondary) transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="/terms" className="hover:text-(--secondary) transition-colors">Terms & Conditions</Link></li>
                         </ul>
                     </div>
 
@@ -80,7 +80,7 @@ export default function Footer() {
                     <p className="text-xs">
                         &copy; {currentYear} PrimeMart. Crafted with passion for quality shopping.
                     </p>
-                    <div className="flex items-center gap-2 text-xs hover:text-[var(--secondary)] transition-colors cursor-pointer">
+                    <div className="flex items-center gap-2 text-xs hover:text-(--secondary) transition-colors cursor-pointer">
                         <Mail size={14} /> <span>support@primemart.com</span>
                     </div>
                 </div>

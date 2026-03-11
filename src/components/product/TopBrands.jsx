@@ -31,7 +31,7 @@ export default function TopBrands() {
   if (!mounted) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-[var(--surface)] transition-colors duration-500 overflow-hidden">
+    <section className="py-16 md:py-24 bg-(--background) transition-colors duration-500 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 mb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,21 +39,22 @@ export default function TopBrands() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--secondary)]/10 text-[var(--secondary)] text-xs md:text-sm font-bold tracking-widest uppercase mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-(--secondary)/10 text-(--secondary) text-xs md:text-sm font-bold tracking-widest uppercase mb-4">
             Authorized Partners
           </span>
-          <h2 className="text-3xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight">
-            TOP <span className="text-[var(--secondary)]">GLOBAL BRANDS</span>
+          <h2 className="text-3xl md:text-5xl font-black text-(--text-primary) tracking-tight">
+            TOP <span className="text-(--secondary)">GLOBAL BRANDS</span>
           </h2>
-          <p className="text-[var(--text-secondary)] mt-4 max-w-xl mx-auto text-sm md:text-base font-medium">
-            Discover authentic products from world-leading manufacturers delivered to your doorstep.
+          <p className="text-(--text-secondary) mt-4 max-w-xl mx-auto text-sm md:text-base font-medium">
+            Discover authentic products from world-leading manufacturers
+            delivered to your doorstep.
           </p>
         </motion.div>
       </div>
 
       <div className="relative flex items-center">
-        <div className="absolute left-0 z-20 w-20 md:w-64 h-full bg-gradient-to-r from-[var(--surface)] to-transparent pointer-events-none"></div>
-        <div className="absolute right-0 z-20 w-20 md:w-64 h-full bg-gradient-to-l from-[var(--surface)] to-transparent pointer-events-none"></div>
+        <div className="absolute left-0 z-20 w-20 md:w-64 h-full bg-linear-to-r from-(--surface) to-transparent pointer-events-none"></div>
+        <div className="absolute right-0 z-20 w-20 md:w-64 h-full bg-linear-to-l from-(--surface) to-transparent pointer-events-none"></div>
 
         <motion.div
           className="flex gap-4 md:gap-8 lg:gap-10"
@@ -61,10 +62,10 @@ export default function TopBrands() {
           transition={{ ease: "linear", duration: 30, repeat: Infinity }}
         >
           {duplicatedBrands.map((brand, index) => (
-            <div key={`${brand.id}-${index}`} className="flex-shrink-0 group">
+            <div key={`${brand.id}-${index}`} className="shrink-0 group">
               <motion.div
                 whileHover={{ y: -8 }}
-                className="w-32 sm:w-40 md:w-48 lg:w-56 h-24 md:h-32 flex flex-col items-center justify-center bg-white dark:bg-slate-900/30 border border-[var(--border)] dark:border-slate-800/60 rounded-2xl md:rounded-[2.5rem] relative overflow-hidden shadow-sm hover:shadow-2xl hover:border-[var(--secondary)]/40 transition-all duration-500"
+                className="w-32 sm:w-40 md:w-48 lg:w-56 h-24 md:h-32 flex flex-col items-center justify-center bg-white dark:bg-slate-900/30 border border-(--border) dark:border-slate-800/60 rounded-2xl md:rounded-[2.5rem] relative overflow-hidden shadow-sm hover:shadow-2xl hover:border-(--secondary)/40 transition-all duration-500"
               >
                 <div className="relative w-full h-full p-6 flex items-center justify-center">
                   <Image
@@ -75,26 +76,14 @@ export default function TopBrands() {
                     className="object-contain transition-all duration-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 dark:brightness-150 dark:contrast-125 dark:group-hover:brightness-200"
                   />
                 </div>
-
-                <div className="absolute inset-0 bg-[var(--secondary)]/95 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:flex">
-                  <span className="text-white font-extrabold text-xs lg:text-sm uppercase tracking-widest px-4 text-center">
-                    {brand.name}
-                  </span>
-                </div>
               </motion.div>
-
-              <div className="mt-4 text-center md:hidden">
-                <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest opacity-80">
-                  {brand.name}
-                </span>
-              </div>
             </div>
           ))}
         </motion.div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 mt-16 md:mt-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-[var(--border)]/50 pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-(--border)/50 pt-12">
           {[
             { number: "50+", label: "International Brands" },
             { number: "15k+", label: "Premium Products" },
@@ -102,10 +91,10 @@ export default function TopBrands() {
             { number: "24/7", label: "Expert Support" },
           ].map((stat, index) => (
             <div key={index} className="text-center group">
-              <div className="text-2xl md:text-4xl font-black text-[var(--secondary)] tracking-tight group-hover:scale-110 transition-transform duration-300">
+              <div className="text-2xl md:text-4xl font-black text-(--secondary) tracking-tight group-hover:scale-110 transition-transform duration-300">
                 {stat.number}
               </div>
-              <div className="text-[9px] md:text-xs font-bold text-[var(--text-secondary)] uppercase mt-2 tracking-widest opacity-60">
+              <div className="text-[9px] md:text-xs font-bold text-(--text-secondary) uppercase mt-2 tracking-widest opacity-60">
                 {stat.label}
               </div>
             </div>

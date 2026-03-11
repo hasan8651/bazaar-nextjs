@@ -41,9 +41,9 @@ router.push(`/search_page?q=${searchTerm}`);
     <div className="flex items-center gap-2 w-full">
       <form 
         onSubmit={handleSearch}
-        className="flex-1 flex items-center bg-[var(--surface)] border border-[var(--border)] rounded-full h-11 shadow-sm overflow-hidden focus-within:ring-2 ring-[var(--secondary)]/20 transition-all"
+        className="flex-1 flex items-center bg-(--surface) border border-(--border) rounded-full h-11 shadow-sm overflow-hidden focus-within:ring-2 ring-(--secondary)/20 transition-all"
       >
-        <div className="pl-4 text-[var(--text-secondary)] shrink-0">
+        <div className="pl-4 text-(--text-secondary) shrink-0">
           <Search size={18} />
         </div>
 
@@ -52,7 +52,7 @@ router.push(`/search_page?q=${searchTerm}`);
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search products..."
-          className="flex-1 px-3 h-full bg-transparent outline-none text-sm text-[var(--text-primary)] min-w-0"
+          className="flex-1 px-3 h-full bg-transparent outline-none text-sm text-(--text-primary) min-w-0"
         />
         
         {/* Mic & X Group */}
@@ -78,7 +78,7 @@ router.push(`/search_page?q=${searchTerm}`);
         {/* Search Button */}
         <button 
           type="submit"
-          className="hidden md:flex items-center justify-center h-full px-8 bg-[var(--secondary)] text-white font-semibold text-sm hover:bg-[var(--secondary)]/90 active:scale-[0.98] transition-all duration-300"
+          className="hidden md:flex items-center justify-center h-full px-8 bg-(--secondary) text-white font-semibold text-sm hover:bg-(--secondary)/90 active:scale-[0.98] transition-all duration-300"
         >
           Search
         </button>
@@ -89,7 +89,7 @@ router.push(`/search_page?q=${searchTerm}`);
         <button 
           type="button"
           onClick={() => { onClose(); }}
-          className="p-2 text-[var(--text-primary)] md:hidden"
+          className="p-2 text-(--text-primary) md:hidden"
         >
           <X size={24} />
         </button>
