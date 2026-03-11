@@ -1,4 +1,3 @@
-// src/components/dashboard/DashboardGraph.jsx
 "use client";
 
 import React from "react";
@@ -20,19 +19,19 @@ import {
  */
 export default function DashboardGraph({ data, title, subtitle }) {
   return (
-    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm h-full">
+    <div className="bg-(--surface) border border-(--border) rounded-2xl p-6 shadow-sm h-full">
       {/* Graph Header */}
       <div className="flex flex-col mb-6">
-        <h3 className="text-lg font-bold text-[var(--text-primary)] tracking-tight">
+        <h3 className="text-lg font-bold text-(--text-primary) tracking-tight">
           {title}
         </h3>
-        <p className="text-xs text-[var(--text-secondary)] font-medium">
+        <p className="text-xs text-(--text-secondary) font-medium">
           {subtitle}
         </p>
       </div>
 
       {/* Chart Container */}
-      <div className="h-[300px] w-full">
+      <div className="h-75 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}

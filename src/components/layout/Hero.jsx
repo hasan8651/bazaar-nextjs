@@ -6,6 +6,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -107,6 +108,7 @@ const slides = [
 const IMAGE_DURATION = 8;
 
 export default function Hero() {
+  const { data: session, status } = useSession();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -258,7 +260,7 @@ export default function Hero() {
               {/* CTA Buttons - No Animation */}
               <div className="mt-8 flex flex-row justify-center md:justify-start gap-4">
                 <Link
-                  href="/shop"
+                  href={session ? "/shop" : "/login"}
                   className="px-8 py-3 bg-(--secondary) text-white rounded-full font-bold hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-indigo-500/10"
                 >
                   Shop Now

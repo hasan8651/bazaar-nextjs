@@ -13,7 +13,7 @@ export default function ProductPage({ singleProduct }) {
 
                 {/* LEFT: Image Gallery */}
                 <div className="space-y-4">
-                    <div className="relative aspect-[6/5] bg-gray-100 rounded-xl overflow-hidden">
+                    <div className="relative aspect-6/5 bg-gray-100 rounded-xl overflow-hidden">
                         <img
                             src={singleProduct?.images?.thumbnail}
                             alt="Main Product"
@@ -98,11 +98,11 @@ export default function ProductPage({ singleProduct }) {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="btn btn-secondary !flex !items-center justify-center gap-2 !rounded-full  lg:!px-15">
+                        <button className="btn btn-secondary flex! items-center! justify-center gap-2 rounded-full!  lg:px-15!">
                             <ShoppingCart size={20} />
                             <span>Add to Cart</span>
                         </button>
-                        <button className="btn btn-primary !rounded-full lg:!px-20">
+                        <button className="btn btn-primary rounded-full! lg:px-20!">
                             Buy Now
                         </button>
                     </div>

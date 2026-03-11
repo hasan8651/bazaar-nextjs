@@ -23,10 +23,10 @@ const DATA = [
 
 export default function SellerStatsGraph() {
   return (
-    <div className="w-full h-[350px]">
+    <div className="w-full h-87.5">
       <div className="mb-6">
-        <h3 className="text-lg font-bold text-[var(--text-primary)]">Sales Performance</h3>
-        <p className="text-xs text-[var(--text-secondary)] opacity-60">Revenue generated over the last 7 days</p>
+        <h3 className="text-lg font-bold text-(--text-primary)">Sales Performance</h3>
+        <p className="text-xs text-(--text-secondary) opacity-60">Revenue generated over the last 7 days</p>
       </div>
 
       <ResponsiveContainer width="100%" height="100%">
