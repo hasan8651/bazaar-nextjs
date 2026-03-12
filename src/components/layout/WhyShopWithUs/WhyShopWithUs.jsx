@@ -24,21 +24,21 @@ const WhyShopWithUs = () => {
   ];
 
   return (
-    <section className="py-8 relative overflow-hidden bg-[var(--background)]">
+    <section className="py-8 relative overflow-hidden bg-(--background)">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--secondary)]/10 blur-[120px] rounded-full -z-10" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-(--secondary)/10 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-black uppercase tracking-[0.3em] text-[var(--secondary)] bg-[var(--secondary)]/10 rounded-full">
+          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-black uppercase tracking-[0.3em] text-(--secondary) bg-(--secondary)/10 rounded-full">
             Our Excellence
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tighter">
-            WHY SHOP <span className="text-[var(--secondary)] italic">WITH US</span>
+          <h2 className="text-4xl md:text-6xl font-black text-(--text-primary) tracking-tighter">
+            WHY SHOP <span className="text-(--secondary) italic">WITH US</span>
           </h2>
-          <p className="mt-6 text-lg text-[var(--text-secondary)] max-w-2xl mx-auto opacity-80 font-medium">
+          <p className="mt-6 text-lg text-(--text-secondary) max-w-2xl mx-auto opacity-80 font-medium">
             Experience the future of online shopping with our world-class service standards.
           </p>
         </div>
@@ -48,19 +48,19 @@ const WhyShopWithUs = () => {
           {features.map((f) => (
             <div
               key={f.id}
-              className="group relative p-8 rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--secondary)]/10 overflow-hidden"
+              className="group relative p-8 rounded-[2.5rem] bg-(--surface) border border-(--border) transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-(--secondary)/10 overflow-hidden"
             >
               {/* Hover Background Glow */}
-              <div className={`absolute -inset-px bg-gradient-to-br ${f.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+              <div className={`absolute -inset-px bg-linear-to-br ${f.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
               
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center mb-8 text-white shadow-lg shadow-inherit/20 group-hover:scale-110 transition-transform duration-500`}>
+              <div className={`w-16 h-16 rounded-2xl bg-linear-to-br ${f.color} flex items-center justify-center mb-8 text-white shadow-lg shadow-inherit/20 group-hover:scale-110 transition-transform duration-500`}>
                 <f.icon size={32} strokeWidth={2} />
               </div>
 
-              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-[var(--secondary)] transition-colors">
+              <h3 className="text-xl font-bold text-(--text-primary) mb-3 group-hover:text-(--secondary) transition-colors">
                 {f.title}
               </h3>
-              <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium opacity-70">
+              <p className="text-(--text-secondary) text-sm leading-relaxed font-medium opacity-70">
                 {f.desc}
               </p>
             </div>
@@ -68,14 +68,14 @@ const WhyShopWithUs = () => {
         </div>
 
         {/* Stats Section with Glassmorphism */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 p-8 md:p-12 rounded-[3rem] bg-[var(--surface)] border border-[var(--border)] shadow-sm backdrop-blur-sm mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 p-8 md:p-12 rounded-[3rem] bg-(--surface) border border-(--border) shadow-sm backdrop-blur-sm mb-20">
           {stats.map((s, idx) => (
             <div key={idx} className="text-center relative group">
-              {idx !== 0 && <div className="hidden lg:block absolute left-0 top-1/4 bottom-1/4 w-px bg-[var(--border)] opacity-50" />}
-              <h4 className="text-4xl md:text-5xl font-black text-[var(--text-primary)] mb-2 tracking-tighter group-hover:scale-110 transition-transform">
+              {idx !== 0 && <div className="hidden lg:block absolute left-0 top-1/4 bottom-1/4 w-px bg-(--border) opacity-50" />}
+              <h4 className="text-4xl md:text-5xl font-black text-(--text-primary) mb-2 tracking-tighter group-hover:scale-110 transition-transform">
                 {s.label}
               </h4>
-              <p className="text-[10px] md:text-xs font-black text-[var(--text-secondary)] uppercase tracking-[0.2em] opacity-60">
+              <p className="text-[10px] md:text-xs font-black text-(--text-secondary) uppercase tracking-[0.2em] opacity-60">
                 {s.sub}
               </p>
             </div>
@@ -86,21 +86,21 @@ const WhyShopWithUs = () => {
         <div className="flex flex-col items-center gap-6">
           <div className="flex -space-x-3">
              {[1, 2, 3, 4, 5].map((i) => (
-               <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--background)] bg-gray-200 overflow-hidden shadow-sm">
+               <div key={i} className="w-12 h-12 rounded-full border-4 border-(--background) bg-gray-200 overflow-hidden shadow-sm">
                  <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" />
                </div>
              ))}
-             <div className="w-12 h-12 rounded-full border-4 border-[var(--background)] bg-[var(--secondary)] flex items-center justify-center text-white text-xs font-bold">
+             <div className="w-12 h-12 rounded-full border-4 border-(--background) bg-(--secondary) flex items-center justify-center text-white text-xs font-bold">
                +50k
              </div>
           </div>
-          <div className="flex flex-col md:flex-row items-center gap-3 bg-[var(--surface)] border border-[var(--border)] px-8 py-4 rounded-full shadow-xl">
+          <div className="flex flex-col md:flex-row items-center gap-3 bg-(--surface) border border-(--border) px-8 py-4 rounded-full shadow-xl">
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={18} className="fill-orange-400 text-orange-400" />
               ))}
             </div>
-            <span className="text-sm font-bold text-[var(--text-primary)]">
+            <span className="text-sm font-bold text-(--text-primary)">
               Trusted by 50,000+ happy shoppers worldwide
             </span>
           </div>

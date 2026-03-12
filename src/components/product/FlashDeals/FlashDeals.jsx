@@ -71,16 +71,16 @@ export default function FlashDeals() {
   return (
     <section className="max-w-7xl mx-auto px-4 my-6">
       {/* --- HEADER SECTION --- */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 p-6 md:p-10 rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] relative overflow-hidden">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 p-6 md:p-10 rounded-[2.5rem] bg-(--surface) border border-(--border) relative overflow-hidden">
         <div className="relative z-10">
-          <div className="flex items-center gap-2 text-[var(--secondary)] mb-3">
+          <div className="flex items-center gap-2 text-(--secondary) mb-3">
             <Sparkles size={16} className="animate-pulse" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em]">
               Exclusive Offers
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[var(--text-primary)] tracking-tighter">
-            FLASH <span className="text-[var(--secondary)] italic">DEALS</span>
+          <h2 className="text-4xl md:text-5xl font-black text-(--text-primary) tracking-tighter">
+            FLASH <span className="text-(--secondary) italic">DEALS</span>
           </h2>
         </div>
 
@@ -108,10 +108,10 @@ export default function FlashDeals() {
         {products.map((product) => (
           <div
             key={product.id}
-            className="group relative bg-[var(--surface)] border border-[var(--border)] rounded-[2rem] md:rounded-[2.5rem] p-3 md:p-5 transition-all duration-500 hover:shadow-xl hover:-translate-y-2"
+            className="group relative bg-(--surface) border border-(--border) rounded-4xl md:rounded-[2.5rem] p-3 md:p-5 transition-all duration-500 hover:shadow-xl hover:-translate-y-2"
           >
             {/* Image Area */}
-            <div className="relative aspect-square bg-[var(--background)] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 border border-[var(--border)] flex items-center justify-center">
+            <div className="relative aspect-square bg-(--background) rounded-3xl md:rounded-4xl overflow-hidden mb-4 border border-(--border) flex items-center justify-center">
               {/* Discount Badge */}
               <div className="absolute top-3 left-3 bg-red-500 text-white text-[9px] md:text-[10px] font-black px-2 py-1 rounded-lg z-10">
                 {product.discount}
@@ -135,15 +135,15 @@ export default function FlashDeals() {
 
             {/* Product Info */}
             <div className="space-y-2 px-1">
-              <h3 className="font-bold text-[var(--text-primary)] text-xs md:text-base line-clamp-1 group-hover:text-[var(--secondary)]">
+              <h3 className="font-bold text-(--text-primary) text-xs md:text-base line-clamp-1 group-hover:text-(--secondary)">
                 {product.name}
               </h3>
 
               <div className="flex items-center gap-2">
-                <span className="text-lg md:text-xl font-black text-[var(--text-primary)]">
+                <span className="text-lg md:text-xl font-black text-(--text-primary)">
                   ${product.price}
                 </span>
-                <span className="text-[10px] md:text-xs text-[var(--text-secondary)] line-through opacity-50">
+                <span className="text-[10px] md:text-xs text-(--text-secondary) line-through opacity-50">
                   ${product.oldPrice}
                 </span>
               </div>
@@ -152,12 +152,12 @@ export default function FlashDeals() {
               <div className="pt-2">
                 <div className="w-full h-1 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-orange-500 to-[#0EA5A4] transition-all duration-1000"
+                    className="h-full bg-linear-to-r from-orange-500 to-[#0EA5A4] transition-all duration-1000"
                     style={{ width: product.soldPercentage }}
                   ></div>
                 </div>
                 <div className="flex justify-between items-center mt-1.5">
-                  <p className="text-[8px] md:text-[9px] font-bold text-[var(--text-secondary)] uppercase">
+                  <p className="text-[8px] md:text-[9px] font-bold text-(--text-secondary) uppercase">
                     {product.stockLeft} Left
                   </p>
                   <div className="flex items-center gap-1 text-[8px] font-black text-orange-500">

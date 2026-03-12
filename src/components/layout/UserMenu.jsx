@@ -51,7 +51,7 @@ export default function UserMenu({ user }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 group focus:outline-none"
       >
-        <div className="w-10 h-10 rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] hover:border-[var(--secondary)] transition-colors overflow-hidden flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border border-(--border) bg-(--surface) text-(--text-primary) hover:border-(--secondary) transition-colors overflow-hidden flex items-center justify-center">
           {user?.image ? (
             <Image
               src={user.image}
@@ -69,20 +69,20 @@ export default function UserMenu({ user }) {
       {/* Overlay for closing menu */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-[90]"
+          className="fixed inset-0 z-90"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
 
       {/* Menu Container */}
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-64 z-[100] rounded-2xl border border-[var(--border)] shadow-xl bg-[var(--background)] py-2">
+        <div className="absolute right-0 mt-3 w-64 z-100 rounded-2xl border border-(--border) shadow-xl bg-(--background) py-2">
           {user ? (
             <>
               {/* User Info */}
-              <div className="px-4 py-2 mb-2 border-b border-[var(--border)]">
+              <div className="px-4 py-2 mb-2 border-b border-(--border)">
                 <p className="text-sm font-bold truncate">{user.name}</p>
-                <p className="text-[11px] text-[var(--text-secondary)] truncate">
+                <p className="text-[11px] text-(--text-secondary) truncate">
                   {user.email}
                 </p>
               </div>
@@ -122,7 +122,7 @@ export default function UserMenu({ user }) {
               </div>
 
               {/* Seller Zone Section */}
-              <div className="border-t border-[var(--border)] mt-2 pt-2">
+              <div className="border-t border-(--border) mt-2 pt-2">
                 {user?.role === "seller" ? (
                   <MenuLink
                     href="/seller/products"
@@ -136,7 +136,7 @@ export default function UserMenu({ user }) {
                     icon={<Store size={18} />}
                     label="Become a Seller"
                     onClick={() => setIsOpen(false)}
-                    className="text-[var(--secondary)] font-bold"
+                    className="text-(--secondary) font-bold"
                   />
                 )}
               </div>
@@ -147,14 +147,14 @@ export default function UserMenu({ user }) {
               <Link
                 href="/login"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-2 bg-[var(--secondary)] text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
+                className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
               >
                 <LogIn size={18} /> Login
               </Link>
               <Link
-                href="/signup"
+                href="/register"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-2 bg-[var(--surface)] text-[var(--text-primary)] rounded-lg text-sm font-semibold transition-all hover:bg-[var(--border)]"
+               className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
               >
                 Sign Up
               </Link>
@@ -162,10 +162,10 @@ export default function UserMenu({ user }) {
           )}
 
           {/* Footer Actions (Theme & Logout) */}
-          <div className="border-t border-[var(--border)] mt-2 pt-2">
+          <div className="border-t border-(--border) mt-2 pt-2">
             <button
               onClick={toggleTheme}
-              className="flex w-full items-center gap-3 px-4 py-2.5 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface)] transition-colors"
+              className="flex w-full items-center gap-3 px-4 py-2.5 text-sm font-semibold text-(--text-primary) hover:bg-(--surface) transition-colors cursor-pointer"
             >
               {isDarkMode ? (
                 <Sun size={18} className="text-amber-500" />
@@ -178,7 +178,7 @@ export default function UserMenu({ user }) {
             {user && (
               <button
                 onClick={() => signOut()}
-                className="flex w-full items-center gap-3 px-4 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+               className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
               >
                 <LogOut size={18} /> Logout
               </button>
@@ -196,7 +196,7 @@ function MenuLink({ href, icon, label, onClick, className = "" }) {
     <Link
       href={href}
       onClick={onClick}
-      className={`flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface)] text-sm font-semibold text-[var(--text-primary)] transition-colors ${className}`}
+      className={`flex items-center gap-3 px-4 py-2.5 hover:bg-(--surface) text-sm font-semibold text-(--text-primary) transition-colors ${className}`}
     >
       {icon} {label}
     </Link>
