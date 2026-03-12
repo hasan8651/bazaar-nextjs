@@ -22,7 +22,7 @@ export const MENU_ITEMS = {
   // --- Admin Dashboard Menu ---
   admin: [
     { title: "Dashboard", path: "/admin", icon: LayoutDashboard },
-    { title: "All Products", path: "/admin/products", icon: Package },
+    { title: "Manage Products", path: "/admin/products", icon: Package },
     { title: "Categories", path: "/admin/categories", icon: PlusCircle },
     { title: "All Orders", path: "/admin/orders", icon: ShoppingBag },
     { title: "Sellers", path: "/admin/sellers", icon: Store },
