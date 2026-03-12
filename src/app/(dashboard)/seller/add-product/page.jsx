@@ -1,4 +1,6 @@
 "use client";
+import axiosInstance from '@/lib/axiosInstance';
+import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -39,7 +41,10 @@ export default function ProductForm() {
   const [imagePreview, setImagePreview] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
+  const { data: session } = useSession();
+  const user = session?.user;
 
+  console.log(user)
   const {
     register,
     handleSubmit,
@@ -57,9 +62,22 @@ export default function ProductForm() {
 
 
   const onSubmit = async (data) => {
-    await new Promise((r) => setTimeout(r, 900)); // Simulate API call
-    setSubmittedData(data);
-    setSubmitted(true);
+    try {
+
+      const payload = {
+        ...data,
+        userRole:user?.role
+      }
+      const res = await axiosInstance.post('/products/add',payload)
+      console.log(res.data)
+      setSubmittedData(payload);
+      setSubmitted(true);
+    }
+    catch(err) {
+
+      console.log('Error' , err)
+
+    }
   };
 
   const handleReset = () => {
