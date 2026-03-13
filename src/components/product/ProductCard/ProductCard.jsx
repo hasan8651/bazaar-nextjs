@@ -92,11 +92,11 @@ const ProductCard = ({ product }) => {
 
         <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-1.5 sm:gap-3">
           <span className="text-sm sm:text-base lg:text-lg font-bold text-(--primary)">
-            ${pricing?.basePrice?.toFixed(2) || "0.00"}
+            ${pricing?.basePrice || "0.00"}
           </span>
           {pricing?.oldPrice > pricing?.basePrice && (
             <span className="text-[10px] sm:text-sm text-gray-400 line-through">
-              ${pricing?.oldPrice?.toFixed(2)}
+              ${pricing?.oldPrice}
             </span>
           )}
         </div>
