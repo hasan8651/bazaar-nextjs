@@ -9,11 +9,8 @@ export default function AdminLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { data: session } = useSession();
 
-<<<<<<< HEAD
   // যদিও আমরা হার্ডকোড করে "admin" দিচ্ছি, তবে সেশন থেকে নেওয়া ভালো
-=======
   // সেশন থেকে রোল নেওয়া হচ্ছে
->>>>>>> development
   const userRole = session?.user?.role || "admin";
 
   const toggleSidebar = () => {
@@ -22,11 +19,7 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className="flex min-h-screen bg-[var(--background)]">
-<<<<<<< HEAD
-      {/* Sidebar - Admin Role */}
-=======
       {/* --- Sidebar Section --- */}
->>>>>>> development
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-72 transition-transform duration-300 transform 
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
@@ -46,11 +39,7 @@ export default function AdminLayout({ children }) {
 
       {/* --- Main Content Area --- */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
-<<<<<<< HEAD
-        {/* Header */}
-=======
         {/* Header - মোবাইল টগল ফাংশনসহ */}
->>>>>>> development
         <DashboardHeader role="admin" toggleSidebar={toggleSidebar} />
 
         {/* Scrollable Body */}

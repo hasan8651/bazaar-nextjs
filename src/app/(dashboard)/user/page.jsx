@@ -1,7 +1,6 @@
-// src/app/(dashboard)/user/page.jsx
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ShoppingBag,
   Package,
@@ -11,287 +10,340 @@ import {
   CheckCircle2,
   Gift,
   Zap,
+  Loader2,
+  ShoppingCart,
+  Info,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import axiosInstance from "@/lib/axiosInstance";
 import DashboardCard from "@/components/Dashboard/DashboardCard";
 import DashboardGraph from "@/components/Dashboard/UserGraph";
+import { toast, Toaster } from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Mock Data for the graph
-const ANALYTICS_DATA = [
+//static graph
+const STATIC_ANALYTICS = [
   { name: "Jan", value: 400 },
   { name: "Feb", value: 800 },
   { name: "Mar", value: 600 },
   { name: "Apr", value: 1200 },
   { name: "May", value: 900 },
   { name: "Jun", value: 1500 },
-  { name: "Jul", value: 1300 },
-];
-
-// Mock Data for orders
-const RECENT_ORDERS = [
-  {
-    id: "#PM-9821",
-    product: "Apple iPhone 15 Pro",
-    date: "Feb 24, 2026",
-    status: "Delivered",
-    amount: "$1,299.00",
-  },
-  {
-    id: "#PM-9825",
-    product: "Sony WH-1000XM5",
-    date: "Feb 28, 2026",
-    status: "Processing",
-    amount: "$349.50",
-  },
-  {
-    id: "#PM-9829",
-    product: "Nike Air Jordan 1",
-    date: "Mar 01, 2026",
-    status: "Pending",
-    amount: "$170.00",
-  },
 ];
 
 export default function UserDashboard() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
+  console.log("Current Session User:", session?.user);
+  const [stats, setStats] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Logic for Greeting
-  const fullName = session?.user?.name || "User";
-  const userName = fullName.split(" ")[0];
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        // 1.stats and order apis call
+        const [statsRes, ordersRes] = await Promise.all([
+          axiosInstance.get("/user-dashboard/stats"),
+          axiosInstance.get("/user-dashboard/orders"),
+        ]);
 
+        if (statsRes.data.success) setStats(statsRes.data.stats);
+        if (ordersRes.data.success) setOrders(ordersRes.data.data.slice(0, 5)); //last 5 data
+      } catch (error) {
+        console.error("Dashboard Data Error:", error);
+        toast.error("Failed to sync your dashboard");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (session) fetchDashboardData();
+  }, [session]);
+
+  const userName = session?.user?.name?.split(" ")[0] || "User";
   const hour = new Date().getHours();
-  let greeting = "Good morning";
-  if (hour >= 12 && hour < 17) greeting = "Good afternoon";
-  if (hour >= 17) greeting = "Good evening";
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
-  // Loading State
-  if (status === "loading") {
+  if (loading)
     return (
-      <div className="h-[60vh] w-full flex items-center justify-center">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[var(--secondary)]"></div>
+      <div className="h-[60vh] w-full flex flex-col items-center justify-center gap-4">
+        <Loader2 className="animate-spin text-[var(--secondary)] w-10 h-10" />
+        <p className="text-[var(--text-secondary)] font-bold animate-pulse uppercase tracking-widest text-xs">
+          Syncing Data...
+        </p>
       </div>
     );
-  }
 
   return (
-    <div className="space-y-10 pb-10">
-      {/* 1. Ultra-Clean Premium Welcome Section */}
-      <div className="relative overflow-hidden rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] p-8 md:p-14 shadow-sm">
-        {/* Subtle Background Glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--secondary)] opacity-[0.03] rounded-full blur-[100px] -mr-20 -mt-20"></div>
+    <div className="space-y-10 pb-10 max-w-[1400px] mx-auto">
+      <Toaster />
 
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-          {/* Minimalist Avatar */}
-          <div className="shrink-0">
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-gradient-to-tr from-[var(--secondary)] to-[var(--secondary)]/30 p-[2px]">
-              <div className="w-full h-full rounded-[2.3rem] bg-[var(--surface)] p-1">
-                {session?.user?.image ? (
-                  <img
-                    src={session.user.image}
-                    alt={userName}
-                    className="w-full h-full object-cover rounded-[2rem]"
-                  />
-                ) : (
-                  <div className="w-full h-full rounded-[2rem] bg-[var(--secondary)]/5 flex items-center justify-center">
-                    <span className="text-4xl font-black text-[var(--secondary)]">
-                      {userName.charAt(0)}
-                    </span>
-                  </div>
-                )}
-              </div>
+      {/* 1. Welcome Section */}
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] p-8 md:p-14 shadow-sm group">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--secondary)] opacity-[0.03] rounded-full blur-[100px] -mr-20 -mt-20 group-hover:opacity-[0.06] transition-opacity" />
+
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-gradient-to-tr from-[var(--secondary)] to-[var(--secondary)]/30 p-[2px] shadow-2xl">
+            <div className="w-full h-full rounded-[2.3rem] bg-[var(--surface)] p-1 overflow-hidden">
+              <img
+                key={session?.user?.image}
+                src={session?.user?.image || "/avatar.png"}
+                alt="Avatar"
+                className="w-full h-full object-cover rounded-[2rem]"
+              />
             </div>
           </div>
 
-          {/* Simple & Bold Greeting + Branding */}
-          <div className="text-center md:text-left">
-            {/* --- PrimeMart Brand Badge --- */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/5 border border-[var(--secondary)]/10 mb-4 group cursor-default transition-all duration-300 hover:bg-[var(--secondary)]/10">
-              <div className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] animate-pulse"></div>
-              <span className="text-[10px] font-bold text-[var(--secondary)] uppercase tracking-[0.2em]">
-                Prime
-                <span className="text-[var(--text-primary)] opacity-70">
-                  Mart
-                </span>{" "}
-                Official
+          <div className="flex-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/10 border border-[var(--secondary)]/20 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
+              <span className="text-[10px] font-black text-[var(--secondary)] uppercase tracking-[0.2em]">
+                Member ID: {session?.user?.id?.slice(-6) || "N/A"}
               </span>
             </div>
-
-            <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tight leading-tight">
-              {greeting}, <br className="hidden md:block" />
+            <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tight">
+              {greeting},{" "}
               <span className="text-[var(--secondary)]">{userName}</span>
             </h1>
-
-            <p className="text-[var(--text-secondary)] text-lg md:text-xl mt-4 font-medium opacity-70 max-w-xl">
-              It’s good to have you back at{" "}
-              <span className="relative inline-block font-bold text-[var(--text-primary)] group">
-                PrimeMart
-                {/* Underline Glow Effect */}
-                <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[var(--secondary)] to-transparent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+            <p className="text-[var(--text-secondary)] text-lg mt-4 font-medium opacity-80 max-w-xl">
+              Everything looks great today. You have{" "}
+              <span className="text-[var(--text-primary)] font-bold">
+                {stats?.orders?.pendingOrders || 0} pending shipments
               </span>
-              . Here’s what’s happening today.
+              .
             </p>
           </div>
         </div>
       </div>
 
-      {/* 2. Metrics Grid */}
+      {/* 2. Metrics Grid (API Data) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <DashboardCard
-          title="Total Expenditure"
-          value="$4,250.00"
+          title="Total Spent"
+          value={`৳${stats?.orders?.totalSpent?.toLocaleString() || 0}`}
           subtitle="Lifetime spending"
           icon={ShoppingBag}
-          trend="12.5%"
-          trendType="up"
         />
         <DashboardCard
-          title="Total Orders"
-          value="156"
+          title="My Orders"
+          value={stats?.orders?.totalOrders || 0}
           subtitle="Completed purchases"
           icon={Package}
-          trend="8%"
-          trendType="up"
         />
         <DashboardCard
           title="Wishlist"
-          value="42"
-          subtitle="Saved items"
+          value={stats?.wishlistCount || 0}
+          subtitle="Items saved for later"
           icon={Heart}
-          trend="5%"
-          trendType="down"
         />
         <DashboardCard
-          title="In Transit"
-          value="03"
-          subtitle="Active deliveries"
-          icon={Truck}
+          title="Active Cart"
+          value={stats?.cartCount || 0}
+          subtitle="Items in your bag"
+          icon={ShoppingCart}
         />
       </div>
 
-      {/* 3. Analytics Graph Section */}
+      {/* 3. Analytics Graph */}
       <div className="w-full">
         <DashboardGraph
-          title="Spending Analytics"
-          subtitle="Monthly breakdown of your purchase history"
-          data={ANALYTICS_DATA}
+          title="Purchase Behavior"
+          subtitle="Visual breakdown of your monthly activity"
+          data={STATIC_ANALYTICS}
         />
       </div>
 
-      {/* 4. Recent Orders Table */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[2rem] shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-[var(--border)] flex justify-between items-center">
-          <h3 className="font-bold text-[var(--text-primary)] text-lg">
-            Recent Orders
-          </h3>
-          <button className="text-[var(--secondary)] text-sm font-semibold flex items-center gap-1 hover:translate-x-1 transition-transform">
-            View All <ArrowRight size={16} />
+      {/* 4. Recent Orders (API Data) */}
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[2.5rem] shadow-sm overflow-hidden transition-all hover:shadow-md">
+        <div className="p-8 border-b border-[var(--border)] flex justify-between items-center">
+          <div>
+            <h3 className="font-black text-[var(--text-primary)] text-xl">
+              Recent Activity
+            </h3>
+            <p className="text-xs text-[var(--text-secondary)] font-medium">
+              Track your most recent transactions
+            </p>
+          </div>
+          <button className="px-5 py-2.5 bg-[var(--secondary)]/10 text-[var(--secondary)] text-xs font-black rounded-xl hover:bg-[var(--secondary)] transition-all hover:text-white flex items-center gap-2">
+            View History <ArrowRight size={14} />
           </button>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-[var(--background)]/50 text-[var(--text-secondary)] text-xs uppercase tracking-wider text-left">
+            <thead className="bg-[var(--background)]/50 text-[var(--text-secondary)] text-[10px] font-black uppercase tracking-widest text-left">
               <tr>
-                <th className="px-6 py-4 font-semibold">Order ID</th>
-                <th className="px-6 py-4 font-semibold">Product</th>
-                <th className="px-6 py-4 font-semibold">Date</th>
-                <th className="px-6 py-4 font-semibold">Status</th>
-                <th className="px-6 py-4 font-semibold text-right">Amount</th>
+                <th className="px-8 py-5">Order Reference</th>
+                <th className="px-8 py-5">Product Details</th>
+                <th className="px-8 py-5">Date</th>
+                <th className="px-8 py-5">Status</th>
+                <th className="px-8 py-5 text-right">Amount</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--border)]">
-              {RECENT_ORDERS.map((order) => (
-                <tr
-                  key={order.id}
-                  className="hover:bg-[var(--secondary)]/5 transition-colors group cursor-pointer"
-                >
-                  <td className="px-6 py-4 text-sm font-medium text-[var(--text-primary)]">
-                    {order.id}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-[var(--text-secondary)] font-medium">
-                    {order.product}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-[var(--text-secondary)]">
-                    {order.date}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${
-                        order.status === "Delivered"
-                          ? "bg-green-500/10 text-green-500"
-                          : order.status === "Pending"
-                          ? "bg-amber-500/10 text-amber-500"
-                          : "bg-blue-500/10 text-blue-500"
-                      }`}
-                    >
-                      {order.status === "Delivered" && (
-                        <CheckCircle2 size={12} />
-                      )}
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right text-sm font-bold text-[var(--text-primary)]">
-                    {order.amount}
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <tr
+                    key={order._id}
+                    className="hover:bg-[var(--secondary)]/[0.02] transition-colors group"
+                  >
+                    <td className="px-8 py-5 text-sm font-bold text-[var(--text-primary)] opacity-70">
+                      #{order._id.slice(-8).toUpperCase()}
+                    </td>
+                    <td className="px-8 py-5">
+                      <div className="text-sm font-bold text-[var(--text-primary)] truncate max-w-[200px]">
+                        {order.products[0]?.name}
+                        {order.products.length > 1 && (
+                          <span className="text-[var(--secondary)] ml-1">
+                            +{order.products.length - 1} more
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-8 py-5 text-sm text-[var(--text-secondary)] font-medium">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-8 py-5">
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide ${
+                          order.orderStatus === "delivered"
+                            ? "bg-green-500/10 text-green-500"
+                            : "bg-amber-500/10 text-amber-500"
+                        }`}
+                      >
+                        {order.orderStatus === "delivered" && (
+                          <CheckCircle2 size={12} />
+                        )}
+                        {order.orderStatus}
+                      </span>
+                    </td>
+                    <td className="px-8 py-5 text-right text-sm font-black text-[var(--text-primary)]">
+                      ৳{order.total.toLocaleString()}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="px-8 py-20 text-center">
+                    <div className="flex flex-col items-center gap-3 opacity-30">
+                      <ShoppingBag size={48} />
+                      <p className="font-bold">
+                        No orders found in your history
+                      </p>
+                    </div>
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* 5. Action Cards */}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Promotion Card */}
-        <div className="relative overflow-hidden group p-8 rounded-[2rem] bg-[var(--secondary)] text-white shadow-lg shadow-[var(--secondary)]/20">
-          {/* Background Decorative Shapes */}
-          <div className="absolute -right-10 -bottom-10 w-44 h-44 bg-white opacity-10 rounded-full scale-150 group-hover:scale-125 transition-transform duration-700"></div>
-          <div className="absolute -right-5 -top-5 w-24 h-24 bg-white opacity-5 rounded-full blur-xl group-hover:opacity-10 transition-all duration-700"></div>
-
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-3">
-              <Zap size={20} className="fill-white" />
-              <span className="text-xs font-bold uppercase tracking-widest opacity-80">
-                Promotions
-              </span>
-            </div>
-            <h4 className="text-2xl font-black mb-2">Premium Discount</h4>
-            <p className="text-sm opacity-90 mb-6 max-w-[250px] leading-relaxed">
-              Extra 10% off on all items this weekend just for you.
-            </p>
-            <button className="px-6 py-3 bg-white text-[var(--secondary)] rounded-xl text-xs font-bold hover:scale-105 transition-transform shadow-md">
-              Claim Now
-            </button>
-          </div>
-        </div>
-
-        {/* Referral Card */}
-        <div className="relative overflow-hidden group p-8 rounded-[2rem] bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] shadow-sm hover:border-[var(--secondary)]/30 transition-all duration-300">
-          {/* Background Decorative Shapes */}
-          <div className="absolute -right-10 -bottom-10 w-44 h-44 bg-[var(--secondary)] opacity-[0.03] rounded-full scale-150 group-hover:scale-125 transition-transform duration-700"></div>
-          <Gift
-            size={140}
-            className="absolute -right-10 -bottom-10 text-[var(--secondary)] opacity-[0.03] -rotate-12 group-hover:rotate-0 transition-all duration-700"
-          />
-
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-3">
-              <Gift size={20} className="text-[var(--secondary)]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-                Referrals
-              </span>
-            </div>
-            <h4 className="text-2xl font-black mb-2">Earn Rewards</h4>
-            <p className="text-[var(--text-secondary)] text-sm mb-6 max-w-[250px] leading-relaxed">
-              Invite your friends and get $50 for each successful referral.
-            </p>
-            <button className="px-6 py-3 bg-[var(--secondary)] text-white rounded-xl text-xs font-bold hover:scale-105 transition-transform shadow-lg shadow-[var(--secondary)]/20">
-              Invite Friends
-            </button>
-          </div>
-        </div>
+      {/* 5. Promotional Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <ActionCard
+          title="Summer Sale"
+          desc="Extra 15% discount applied automatically at checkout."
+          icon={Zap}
+          color="bg-[var(--secondary)]"
+          isDark={true}
+        />
+        <ActionCard
+          title="Invite & Earn"
+          desc="Get credits for every friend who joins the PrimeMart community."
+          icon={Gift}
+          color="bg-[var(--surface)]"
+          isDark={false}
+        />
       </div>
     </div>
   );
 }
+
+// Reusable Action Card for the bottom section
+const ActionCard = ({ title, desc, icon: Icon, color, isDark }) => (
+  <motion.div
+    whileHover={{ y: -8 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    className={`relative overflow-hidden p-8 md:p-10 rounded-[2.8rem] shadow-xl group cursor-pointer border ${
+      isDark
+        ? "bg-gradient-to-br from-[var(--secondary)] to-[#5c4cf4] border-transparent"
+        : "bg-[var(--surface)] border-[var(--border)] hover:border-[var(--secondary)]/30"
+    }`}
+  >
+    {/* Background Abstract Shapes (Animate on Hover) */}
+    <div
+      className={`absolute -right-10 -bottom-10 w-48 h-48 rounded-full blur-[80px] transition-all duration-700 group-hover:scale-150 group-hover:opacity-40 ${
+        isDark ? "bg-white/20" : "bg-[var(--secondary)]/10"
+      }`}
+    />
+
+    <div className="relative z-10">
+      {/* Icon Badge */}
+      <div
+        className={`inline-flex p-4 rounded-2xl mb-6 transition-transform duration-500 group-hover:rotate-[15deg] group-hover:scale-110 ${
+          isDark
+            ? "bg-white/10 text-white shadow-inner"
+            : "bg-[var(--secondary)]/10 text-[var(--secondary)]"
+        }`}
+      >
+        <Icon size={28} strokeWidth={2.5} />
+      </div>
+
+      <div className="space-y-3 mb-8">
+        <div className="flex items-center gap-2">
+          <span
+            className={`text-[10px] font-black uppercase tracking-[0.25em] ${
+              isDark ? "text-white/60" : "text-[var(--text-secondary)]/60"
+            }`}
+          >
+            Exclusive Priority
+          </span>
+          <div
+            className={`h-[1px] w-8 ${isDark ? "bg-white/20" : "bg-[var(--border)]"}`}
+          />
+        </div>
+
+        <h4
+          className={`text-2xl md:text-3xl font-black leading-none ${
+            isDark ? "text-white" : "text-[var(--text-primary)]"
+          }`}
+        >
+          {title}
+        </h4>
+
+        <p
+          className={`text-sm md:text-base font-medium leading-relaxed max-w-[280px] ${
+            isDark ? "text-white/80" : "text-[var(--text-secondary)]"
+          }`}
+        >
+          {desc}
+        </p>
+      </div>
+
+      {/* Modern Button with Arrow Hover */}
+      <button
+        className={`flex items-center gap-3 px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-lg active:scale-95 ${
+          isDark
+            ? "bg-white text-[var(--secondary)] hover:shadow-white/20 hover:-translate-y-1"
+            : "bg-[var(--secondary)] text-white hover:shadow-[var(--secondary)]/30 hover:-translate-y-1"
+        }`}
+      >
+        Claim Offer
+        <ArrowRight
+          size={16}
+          className="transition-transform group-hover:translate-x-2"
+        />
+      </button>
+    </div>
+
+    {/* Decorative Floating Icon (Background) */}
+    <Icon
+      size={180}
+      className={`absolute -right-10 -top-10 transition-all duration-1000 opacity-[0.03] group-hover:opacity-[0.08] group-hover:rotate-12 group-hover:scale-110 ${
+        isDark ? "text-white" : "text-[var(--secondary)]"
+      }`}
+    />
+  </motion.div>
+);

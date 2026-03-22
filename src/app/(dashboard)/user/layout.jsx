@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/components/Dashboard/Sidebar";
-import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";

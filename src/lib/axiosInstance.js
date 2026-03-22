@@ -13,9 +13,12 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const session = await getSession();
     const token = session?.accessToken; 
+  
     
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      // console.log("Token Sent:", token);
+      
     }
     return config;
   },

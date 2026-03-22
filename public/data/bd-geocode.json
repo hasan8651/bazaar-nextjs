@@ -1,0 +1,50 @@
+{
+  "Dhaka": {
+    "Dhaka City": ["Dhanmondi", "Gulshan", "Mirpur", "Uttara", "Mohammadpur", "Badda", "Motijheel"],
+    "Gazipur": ["Sreepur", "Kaliakair", "Kapasia", "Sadar"],
+    "Narayanganj": ["Sadar", "Rupganj", "Sonargaon", "Araihazar"],
+    "Tangail": ["Sadar", "Madhupr", "Gopalpur", "Sakhipur"]
+  },
+  "Chattogram": {
+    "Chattogram City": ["Pahartali", "Halishahar", "Panchlaish", "Bakalia", "Kotwali"],
+    "Cox's Bazar": ["Sadar", "Chakaria", "Teknaf", "Ukhia", "Ramu"],
+    "Cumilla": ["Sadar", "Laksam", "Daudkandi", "Chauddagram"],
+    "Feni": ["Sadar", "Chhagalnaiya", "Parshuram", "Daganbhuiyan"]
+  },
+  "Rajshahi": {
+    "Rajshahi City": ["Boalia", "Motihar", "Rajpara", "Shah Mokhdum"],
+    "Bogura": ["Sadar", "Sherpur", "Shajahanpur", "Dhunat"],
+    "Pabna": ["Sadar", "Ishwardi", "Santhia", "Bera"],
+    "Naogaon": ["Sadar", "Mahadebpur", "Patnitala", "Dhamoirhat"]
+  },
+  "Sylhet": {
+    "Sylhet City": ["Zindabazar", "Amberkhana", "South Surma", "Shah Poran"],
+    "Moulvibazar": ["Sadar", "Sreemangal", "Kulaura", "Barlekha"],
+    "Habiganj": ["Sadar", "Nabiganj", "Madhabpur", "Bahubal"],
+    "Sunamganj": ["Sadar", "Chhatak", "Jagannathpur", "Derai"]
+  },
+  "Khulna": {
+    "Khulna City": ["Daulatpur", "Khalishpur", "Khan Jahan Ali", "Sonadanga"],
+    "Jashore": ["Sadar", "Sharsha", "Jhikargacha", "Abhaynagar"],
+    "Satkhira": ["Sadar", "Shyamnagar", "Assasuni", "Kaliganj"],
+    "Bagerhat": ["Sadar", "Mongla", "Morrelganj", "Sarankhola"]
+  },
+  "Barishal": {
+    "Barishal City": ["Kotwali", "Airport", "Kawnia", "Bandar"],
+    "Bhola": ["Sadar", "Char Fasson", "Lalmohan", "Burhanuddin"],
+    "Patuakhali": ["Sadar", "Kalapara", "Bauphal", "Galachipa"],
+    "Pirojpur": ["Sadar", "Mathbaria", "Nazirpur", "Bhandaria"]
+  },
+  "Rangpur": {
+    "Rangpur City": ["Kotwali", "Mahihat", "Parshuram", "Tajhat"],
+    "Dinajpur": ["Sadar", "Birganj", "Parbatipur", "Phulbari"],
+    "Gaibandha": ["Sadar", "Gobindaganj", "Palashbari", "Sundarganj"],
+    "Kurigram": ["Sadar", "Ulipur", "Nageshwari", "Rajarhat"]
+  },
+  "Mymensingh": {
+    "Mymensingh City": ["Mymensingh Sadar", "Muktagacha","Tarakanda","Phulpur", "Fulbaria", "Trishal"],
+    "Netrokona": ["Sadar", "Durgapur", "Mohanganj", "Kendua"],
+    "Sherpur": ["Sadar", "Nakla", "Nalitabari", "Jhenaigati"],
+    "Jamalpur": ["Sadar", "Sarishabari", "Melandaha", "Dewanganj"]
+  }
+}

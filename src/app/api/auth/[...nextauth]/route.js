@@ -39,6 +39,7 @@ export const authOptions = {
             return {
               ...res.data.user,
               accessToken: res.data.token,
+              image: res.data.user.image,
             };
           }
 
@@ -50,12 +51,14 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user}) {
       if (user) {
         token.accessToken = user.accessToken;
         token.role = user.role;
         token.id = user.id;
+       
       }
+  
       return token;
     },
     async session({ session, token }) {

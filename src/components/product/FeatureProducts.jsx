@@ -6,7 +6,6 @@ import Link from "next/link";
 import ProductCard from "./ProductCard/ProductCard";
 import Loading from "@/app/loading";
 
-
 export default function FeatureProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +38,7 @@ export default function FeatureProducts() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loading />
         <p className="text-gray-500 font-medium">Loading products...</p>
       </div>
@@ -49,23 +48,20 @@ export default function FeatureProducts() {
   if (error) return null;
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto bg-[var(--background)]">
+    <section className="py-12 px-4 max-w-7xl mx-auto bg-(--background)">
       <div className="flex justify-between items-end mb-8">
-        {/* <div>
-          <h2 className="text-3xl font-bold text-gray-900">Featured Products</h2>
-          <p className="text-gray-500 mt-2">Selected items from our best categories</p>
-        </div> */}
-                <div className="text-center mb-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--primary)]">
-            Featured <span className="text-[var(--secondary)]">Products</span>
+        <div className="text-center mb-12 md:mb-16">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-(--primary)">
+            Featured <span className="text-(--secondary)">Products</span>
           </h1>
-          <p className="mt-4 text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
+          <p className="mt-4 text-lg text-(--text-secondary) max-w-3xl mx-auto">
             Selected items from our best categories
           </p>
         </div>
+
         <Link
           href="/shop"
-          className="flex items-center gap-2 text-[var(--secondary)] font-semibold hover:gap-3 transition-all"
+          className="flex items-center gap-2 text-(--secondary) font-semibold hover:gap-3 transition-all"
         >
           View All <ArrowRight size={18} />
         </Link>
@@ -73,9 +69,11 @@ export default function FeatureProducts() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6">
         {products && products.length > 0 ? (
-          products.map((item) => (
-            item ? <ProductCard key={item._id || item.id} product={item} /> : null
-          ))
+          products.map((item) =>
+            item ? (
+              <ProductCard key={item._id || item.id} product={item} />
+            ) : null,
+          )
         ) : (
           <div className="col-span-full text-center py-10 text-gray-400">
             No products found.
