@@ -132,7 +132,7 @@ export default function UserMenu({ user }) {
                   />
                 ) : (
                   <MenuLink
-                    href="/become-seller"
+                    href="/user/become-seller"
                     icon={<Store size={18} />}
                     label="Become a Seller"
                     onClick={() => setIsOpen(false)}
@@ -154,7 +154,7 @@ export default function UserMenu({ user }) {
               <Link
                 href="/register"
                 onClick={() => setIsOpen(false)}
-               className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
+                className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
               >
                 Sign Up
               </Link>
@@ -178,7 +178,7 @@ export default function UserMenu({ user }) {
             {user && (
               <button
                 onClick={() => signOut()}
-               className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
+                className="flex items-center justify-center gap-2 w-full py-2 bg-(--secondary) text-white rounded-lg text-sm font-bold transition-all hover:opacity-90"
               >
                 <LogOut size={18} /> Logout
               </button>
