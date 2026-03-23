@@ -9,6 +9,7 @@ export default function AdminLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { data: session } = useSession();
 
+  // যদিও আমরা হার্ডকোড করে "admin" দিচ্ছি, তবে সেশন থেকে নেওয়া ভালো
   // সেশন থেকে রোল নেওয়া হচ্ছে
   const userRole = session?.user?.role || "admin";
 

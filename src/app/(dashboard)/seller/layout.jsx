@@ -15,7 +15,6 @@ export default function SellerLayout({ children }) {
 
   return (
     <div className="flex min-h-screen bg-[var(--background)]">
-      
       {/* --- Sidebar Section --- */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-72 transition-transform duration-300 transform 
@@ -35,7 +34,6 @@ export default function SellerLayout({ children }) {
 
       {/* --- Main Content Area --- */}
       <main className="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
-        
         {/*  toggleSidebar  */}
         <DashboardHeader role="seller" toggleSidebar={toggleSidebar} />
 
