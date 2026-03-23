@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
+
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -9,31 +10,33 @@ const axiosInstance = axios.create({
   },
 });
 
+
 axiosInstance.interceptors.request.use(
   async (config) => {
     const session = await getSession();
-    const token = session?.accessToken; 
-  
-    
+    const token = session?.accessToken;
+   
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      // console.log("Token Sent:", token);
-      
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
+
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response) {
       if (error.response.status === 401) {
+
+
       }
     }
     return Promise.reject(error);
   }
 );
+
 
 export default axiosInstance;
