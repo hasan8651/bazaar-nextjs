@@ -1,14 +1,20 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import axiosInstance from '@/lib/axiosInstance';
+import { getServerSession } from 'next-auth';
 import React from 'react';
+import MyOrder from '../MyOrder/MyOrder';
 
-const page = () => {
+const SellerOrder = async() => {
+  const session = await getServerSession(authOptions)
+  console.log(session)
+   const res = await axiosInstance.get(`/orders/my-orders?email=${session?.user?.email}&page=1&limit=10`)
+   const sellerOrder = res.data || []
+
     return (
-       <div className="flex flex-col h-50 items-center justify-center border-2 border-dashed border-indigo-600 m-2">
-        <h1 className="text-6xl font-bold text-orange-500">
-          orders
-        </h1>
-        <h1 className="mt-4 text-2xl text-blue-500">Under Development</h1>
+       <div>
+        <MyOrder sellerOrder={sellerOrder}></MyOrder>
       </div>
     );
 };
 
-export default page;
+export default SellerOrder;
