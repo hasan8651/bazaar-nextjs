@@ -10,12 +10,8 @@ import Loading from "@/app/loading";
 
 export default function Sidebar({ role }) {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
-  /**
-   * Logic: Determine the current view based on the URL path.
-   * This ensures the correct menu is displayed even if a seller/admin navigates to user pages.
-   */
   const currentView = pathname.startsWith("/admin")
     ? "admin"
     : pathname.startsWith("/seller")
@@ -24,7 +20,6 @@ export default function Sidebar({ role }) {
 
   const menu = MENU_ITEMS[currentView] || [];
 
-  // Handle loading state while session is being fetched
   if (status === "loading") {
     return (
       <aside className="hidden md:flex md:flex-col md:w-72 bg-(--surface) border-r border-(--border) h-screen sticky top-0 items-center justify-center">
@@ -33,172 +28,82 @@ export default function Sidebar({ role }) {
     );
   }
 
-  const user = {
-    name: session?.user?.name || "Guest User",
-    email: session?.user?.email || "Sign in to access",
-    avatarUrl: session?.user?.image || null,
-    isAuthenticated: status === "authenticated",
-  };
-
   return (
     <aside className="flex flex-col w-72 bg-(--surface) border-r border-(--border) h-screen sticky top-0 transition-all duration-300">
-      {/* 1. Brand / Logo Section */}
-      <div className="p-6 border-b border-(--border) h-24 flex items-center">
-        <div className="flex flex-col gap-1">
-          <BrandLogo />
-          <span
-            className={`text-[10px] font-bold uppercase tracking-[0.2em] ml-1 ${
-              currentView === "admin"
-                ? "text-blue-500"
-                : currentView === "seller"
-                  ? "text-green-500"
-                  : "text-(--secondary)"
-            }`}
-          >
+      
+      {/* 1. Simple Brand Header */}
+      <div className="p-8 h-28 flex flex-col justify-center">
+        <BrandLogo />
+        <div className="mt-2 flex items-center gap-2 px-1">
+          <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+            currentView === "admin" ? "bg-blue-500" : currentView === "seller" ? "bg-green-500" : "bg-(--secondary)"
+          }`} />
+          <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${
+            currentView === "admin" ? "text-blue-500" : currentView === "seller" ? "text-green-500" : "text-(--secondary)"
+          }`}>
             {currentView} Portal
           </span>
         </div>
       </div>
 
-      {/* 2. User Profile Section */}
-      <div className="p-6 border-b border-(--border) bg-(--surface-hover)/30">
-        <div className="flex items-center gap-4">
-          <div
-            className={`w-11 h-11 rounded-full flex items-center justify-center overflow-hidden border shadow-sm shrink-0 ${
-              currentView === "admin"
-                ? "border-blue-500/30 bg-blue-500/10"
-                : currentView === "seller"
-                  ? "border-green-500/30 bg-green-500/10"
-                  : "border-(--secondary)/30 bg-(--secondary)/20"
-            }`}
-          >
-            {user.isAuthenticated && user.avatarUrl ? (
-              <img
-                src={session?.user?.image || user.avatarUrl}
-                alt={user.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <span
-                className={`text-lg font-bold ${
-                  currentView === "admin"
-                    ? "text-blue-600"
-                    : currentView === "seller"
-                      ? "text-green-600"
-                      : "text-(--secondary)"
-                }`}
-              >
-                {user.name.charAt(0).toUpperCase()}
-              </span>
-            )}
-          </div>
-
-          <div className="overflow-hidden">
-            <p className="font-bold text-(--text-primary) text-sm truncate">
-              {user.name}
-            </p>
-            <p className="text-xs text-(--text-secondary) truncate italic opacity-70">
-              {user.email}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Navigation Menu with Custom Scrollbar */}
-      <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto custom-sidebar-scroll">
+      {/* 2. Primary Navigation - Pure Focus */}
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-sidebar-scroll">
         {menu.map((item) => {
           const isActive = pathname === item.path;
-
           return (
             <Link
               key={item.title}
               href={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+              className={`flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all duration-300 group ${
                 isActive
                   ? currentView === "admin"
-                    ? "bg-blue-500/10 text-blue-600 font-bold"
+                    ? "bg-blue-500/10 text-blue-600 font-black shadow-sm"
                     : currentView === "seller"
-                      ? "bg-green-500/10 text-green-600 font-bold"
-                      : "bg-(--secondary)/15 text-(--secondary) font-bold shadow-sm"
+                      ? "bg-green-500/10 text-green-600 font-black shadow-sm"
+                      : "bg-(--secondary)/15 text-(--secondary) font-black shadow-sm"
                   : "text-(--text-secondary) hover:bg-(--secondary)/5 hover:text-(--text-primary)"
               }`}
             >
-              <item.icon
-                className={`h-5 w-5 transition-transform group-hover:scale-110 ${
-                  isActive
-                    ? currentView === "admin"
-                      ? "text-blue-600"
-                      : currentView === "seller"
-                        ? "text-green-600"
-                        : "text-(--secondary)"
-                    : "text-(--text-secondary) group-hover:text-(--text-primary)"
-                }`}
-              />
-              <span className="text-sm">{item.title}</span>
+              <item.icon className={`h-5 w-5 transition-all duration-300 ${
+                  isActive ? "scale-110" : "opacity-60 group-hover:opacity-100 group-hover:scale-110"
+              }`} />
+              <span className="text-sm font-bold tracking-tight">{item.title}</span>
             </Link>
           );
         })}
       </nav>
 
-      {/* 4. Role Switcher - Logic for Sellers and Admins */}
+      {/* 3. Role Switcher - Slim & Elegant */}
       {(role === "seller" || role === "admin") && (
-        <div className="px-4 mb-4">
+        <div className="px-5 mb-4">
           <Link
             href={currentView === "user" ? `/${role}` : "/user"}
-            className="flex items-center justify-between w-full p-4 rounded-2xl bg-(--surface-hover) border border-(--border) hover:border-(--secondary)/50 transition-all group"
+            className="flex items-center justify-between w-full p-4 rounded-[1.5rem] bg-(--background) border border-(--border) hover:border-(--secondary)/40 transition-all group shadow-sm active:scale-95"
           >
             <div className="flex flex-col items-start">
-              <span className="text-[9px] font-black text-slate-500 dark:text-slate-300 uppercase tracking-[0.2em]">
-                Switch to
-              </span>
-              <span className="text-xs font-bold text-(--text-primary)">
-                {currentView !== "user"
-                  ? "Buying Mode"
-                  : role === "admin"
-                    ? "Admin Panel"
-                    : "Seller Panel"}
+              <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Navigation</span>
+              <span className="text-[11px] font-black text-(--text-primary)">
+                {currentView !== "user" ? "Exit to App" : role === "admin" ? "Admin Panel" : "Seller Panel"}
               </span>
             </div>
-            <div
-              className={`p-2 rounded-lg shadow-sm transition-transform group-hover:rotate-12 ${
-                currentView !== "user"
-                  ? "bg-(--secondary)/10"
-                  : role === "admin"
-                    ? "bg-blue-500/10"
-                    : "bg-green-500/10"
-              }`}
-            >
-              {currentView !== "user" ? (
-                <ShoppingBag size={16} className="text-(--secondary)" />
-              ) : role === "admin" ? (
-                <LayoutDashboard size={16} className="text-blue-500" />
-              ) : (
-                <Store size={16} className="text-green-500" />
-              )}
+            <div className={`p-2 rounded-xl transition-all group-hover:rotate-12 ${
+                currentView !== "user" ? "bg-(--secondary)/10 text-(--secondary)" : role === "admin" ? "bg-blue-500/10 text-blue-500" : "bg-green-500/10 text-green-500"
+            }`}>
+              {currentView !== "user" ? <ShoppingBag size={14} /> : role === "admin" ? <LayoutDashboard size={14} /> : <Store size={14} />}
             </div>
           </Link>
         </div>
       )}
 
-      {/* 5. Logout Action */}
-      <div className="p-4 border-t border-(--border)">
-        {user.isAuthenticated ? (
-          <button
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="flex items-center gap-3 px-4 py-3 text-(--text-secondary) hover:text-red-500 hover:bg-red-500/5 w-full rounded-xl transition-all duration-200 font-medium group"
-          >
-            <LogOut className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm">Logout</span>
-          </button>
-        ) : (
-          <Link
-            href="/login"
-            className="flex items-center justify-center gap-3 px-4 py-3 bg-(--secondary) text-white w-full rounded-xl font-bold text-sm shadow-lg shadow-(--secondary)/20"
-          >
-            Sign In
-          </Link>
-        )}
+      {/* 4. Action Footer */}
+      <div className="p-4 border-t border-(--border)/50">
+        <button
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="flex items-center gap-3 px-5 py-4 text-(--text-secondary) hover:text-rose-500 hover:bg-rose-500/5 w-full rounded-2xl transition-all duration-300 font-black group text-sm uppercase tracking-wider"
+        >
+          <LogOut className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+          <span>Sign Out</span>
+        </button>
       </div>
     </aside>
   );
