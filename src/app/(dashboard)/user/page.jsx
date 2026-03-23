@@ -11,6 +11,7 @@ import DashboardCard from "@/components/Dashboard/DashboardCard";
 import DashboardGraph from "@/components/Dashboard/UserGraph";
 import { toast, Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import Loading from "@/app/loading";
 
 //static graph
 const STATIC_ANALYTICS = [
@@ -25,6 +26,7 @@ export default function UserDashboard() {
   const [stats, setStats] = useState(null);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+ 
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -53,46 +55,51 @@ export default function UserDashboard() {
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   if (loading) return (
-    <div className="h-[60vh] w-full flex flex-col items-center justify-center gap-4">
-      <Loader2 className="animate-spin text-[var(--secondary)] w-10 h-10" />
-      <p className="text-[var(--text-secondary)] font-bold animate-pulse uppercase tracking-widest text-xs">Syncing Data...</p>
-    </div>
+   <Loading></Loading>
   );
 
   return (
     <div className="space-y-10 pb-10 max-w-[1400px] mx-auto">
       <Toaster />
 
-      {/* 1. Welcome Section */}
-      <div className="relative overflow-hidden rounded-[2.5rem] bg-[var(--surface)] border border-[var(--border)] p-8 md:p-14 shadow-sm group">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--secondary)] opacity-[0.03] rounded-full blur-[100px] -mr-20 -mt-20 group-hover:opacity-[0.06] transition-opacity" />
-        
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-gradient-to-tr from-[var(--secondary)] to-[var(--secondary)]/30 p-[2px] shadow-2xl">
-            <div className="w-full h-full rounded-[2.3rem] bg-[var(--surface)] p-1 overflow-hidden">
-              <img 
-              key={session?.user?.image}
-                src={session?.user?.image || "/avatar.png"} 
-                alt="Avatar" 
-                className="w-full h-full object-cover rounded-[2rem]" 
-              />
-            </div>
-          </div>
+   {/* 1. Compact & Dynamic Welcome Banner */}
+<div className="relative overflow-hidden rounded-[2rem] bg-[var(--surface)] border border-[var(--border)] p-6 md:p-8 shadow-sm group">
+  
+  <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--secondary)] opacity-[0.05] rounded-full blur-[80px] -mr-20 -mt-20 transition-opacity duration-700 group-hover:opacity-[0.1]" />
 
-          <div className="flex-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/10 border border-[var(--secondary)]/20 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-              <span className="text-[10px] font-black text-[var(--secondary)] uppercase tracking-[0.2em]">Member ID: {session?.user?.id?.slice(-6) || "N/A"}</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] tracking-tight">
-              {greeting}, <span className="text-[var(--secondary)]">{userName}</span>
-            </h1>
-            <p className="text-[var(--text-secondary)] text-lg mt-4 font-medium opacity-80 max-w-xl">
-              Everything looks great today. You have <span className="text-[var(--text-primary)] font-bold">{stats?.orders?.pendingOrders || 0} pending shipments</span>.
-            </p>
-          </div>
-        </div>
+  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+    
+    {/* Left Side: Greeting */}
+    <div className="space-y-1">
+      <div className="flex items-center gap-2 mb-2">
+         <span className="flex h-2 w-2 rounded-full bg-[var(--secondary)] animate-pulse" />
+         <span className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-[0.2em]">Dashboard / Home</span>
       </div>
+      <h1 className="text-2xl md:text-3xl font-black text-[var(--text-primary)] tracking-tight">
+        {greeting}, <span className="text-[var(--secondary)]">{session?.user?.name || userName}</span>
+      </h1>
+      <p className="text-[var(--text-secondary)] text-xs font-bold opacity-70">
+        You have <span className="text-[var(--text-primary)]">{stats?.orders?.pendingOrders || 0} pending shipments</span> to process today.
+      </p>
+    </div>
+
+    {/* Right Side: Dynamic Status from API */}
+    <div className="flex items-center gap-4">
+       <div className="hidden sm:flex flex-col items-end text-right border-r border-[var(--border)] pr-4">
+          <span className="text-[9px] font-black text-[var(--text-secondary)] uppercase tracking-wider opacity-50">Member Status</span>
+          
+          {/* Dynamic Logic: Role + Verification check */}
+          <span className={`text-xs font-black uppercase tracking-tighter ${session?.user?.isVerified ? 'text-[#00A99D]' : 'text-amber-500'}`}>
+            {session?.user?.isVerified ? 'Verified' : 'Pending'} {session?.user?.role || 'User'}
+          </span>
+       </div>
+       
+       <div className="p-3 bg-[var(--secondary)]/10 rounded-2xl border border-[var(--secondary)]/20 text-[var(--secondary)] group-hover:scale-110 transition-transform">
+          <ShoppingBag size={20} />
+       </div>
+    </div>
+  </div>
+</div>
 
       {/* 2. Metrics Grid (API Data) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
