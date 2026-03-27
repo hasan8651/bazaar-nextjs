@@ -14,22 +14,28 @@ import {
 import { toast, Toaster } from "react-hot-toast";
 import axiosInstance from "@/lib/axiosInstance";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export default function BecomeSellerPage() {
+  const { data: session } = useSession(); // লগইন করা ইউজারের ডাটা নেয়ার জন্য
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // ব্যাকএন্ড ডক অনুযায়ী স্টেট স্ট্রাকচার (যা ডাটাবেজে যাবে)
   const [formData, setFormData] = useState({
-    shopName: "",
-    shopDescription: "",
-    address: "",
-    phone: "",
+    storeName: "",
+    storeDescription: "",
+    businessAddress: "",
+    storePhone: "",
     nidNumber: "",
-    shopLogo: "",
-    nidCopy: "",
+    shopLogo: "", // এটি ডকে না থাকলেও ইমেজের জন্য রাখা হয়েছে
+    nidCopy: "", // এটি ডকে না থাকলেও ভেরিফিকেশনের জন্য রাখা হয়েছে
+    bankName: "Pending", // ডক অনুযায়ী ডিফল্ট ভ্যালু
+    accountNumber: "0000", // ডক অনুযায়ী ডিফল্ট ভ্যালু
+    mfsNumber: "",
   });
 
-  const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY"; // Ekhane tomar API key boshao
+  const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
   // Image Upload Handler for imgBB
   const handleImageUpload = async (e, fieldName) => {
@@ -60,19 +66,34 @@ export default function BecomeSellerPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.shopLogo || !formData.nidCopy) {
       return toast.error("Please upload all required documents");
     }
 
+    if (!session?.user?.email) {
+      return toast.error("Please login first to apply");
+    }
+
     setIsLoading(true);
+
+    // ব্যাকএন্ড ডক অনুযায়ী ফাইনাল ডাটা অবজেক্ট
+    const finalPayload = {
+      ...formData,
+      storeEmail: session.user.email, // সেশন থেকে ইমেইল ইনজেক্ট করা হচ্ছে
+      mfsNumber: formData.storePhone, // ফোন নাম্বারকেই আপাতত MFS নাম্বার হিসেবে পাঠানো হচ্ছে
+    };
+
     try {
-      // Tomar server repo-te ei endpoint thakte hobe
-      const res = await axiosInstance.post("/sellers/apply", formData);
+      // baseURL-এ /api আছে, তাই এখানে শুধু /seller-auth/apply
+      const res = await axiosInstance.post("/seller-auth/apply", finalPayload);
+
       if (res.data.success) {
         toast.success("Application submitted successfully!");
         setIsSubmitted(true);
       }
     } catch (error) {
+      console.error("Submission Error:", error.response?.data);
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
       setIsLoading(false);
@@ -122,9 +143,9 @@ export default function BecomeSellerPage() {
           <div>
             <label className="text-sm font-semibold ml-1">Shop Name</label>
             <input
-              name="shopName"
+              name="storeName"
               required
-              value={formData.shopName}
+              value={formData.storeName}
               onChange={handleChange}
               placeholder="Prime Gadget Store"
               className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-[#0EA5A4]/20"
@@ -136,10 +157,10 @@ export default function BecomeSellerPage() {
               Shop Description
             </label>
             <textarea
-              name="shopDescription"
+              name="storeDescription"
               required
               rows="3"
-              value={formData.shopDescription}
+              value={formData.storeDescription}
               onChange={handleChange}
               placeholder="Briefly describe your products..."
               className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-[#0EA5A4]/20"
@@ -183,9 +204,9 @@ export default function BecomeSellerPage() {
               <Phone size={14} /> Phone Number
             </label>
             <input
-              name="phone"
+              name="storePhone"
               required
-              value={formData.phone}
+              value={formData.storePhone}
               onChange={handleChange}
               placeholder="+88017..."
               className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-[#0EA5A4]/20"
@@ -197,9 +218,9 @@ export default function BecomeSellerPage() {
               <MapPin size={14} /> Business Address
             </label>
             <input
-              name="address"
+              name="businessAddress"
               required
-              value={formData.address}
+              value={formData.businessAddress}
               onChange={handleChange}
               placeholder="City, Area, Road..."
               className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-[#0EA5A4]/20"
