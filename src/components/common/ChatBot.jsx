@@ -32,14 +32,18 @@ export default function ChatBot() {
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       const chat = model.startChat({
-        history: [],
-        generationConfig: { maxOutputTokens: 500 },
+        history: messages.map((m)=> ({
+          role: m.role === "user"?"user":"model",
+          parts: [{text:m.text}],
+        })),
+        generationConfig: { maxOutputTokens: 2048 },
       });
 
-      const result = await chat.sendMessage(currentInput);
+      const result = await chat.sendMessage(currentInput + "\n\nGive complete answer Do not stop midway.");
       const response = await result.response;
       const botText = response.text();
 
+      
       setMessages((prev) => [...prev, { role: "bot", text: botText }]);
     } catch (error) {
       console.error("AI Error:", error);
