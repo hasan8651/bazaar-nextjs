@@ -4,6 +4,7 @@ import { MapPin, Star, Flame, Minus, Plus, Heart, Truck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from 'react-hot-toast'; // Toast import
 import { useRouter } from "next/navigation";
+import Loading from "@/app/loading";
 
 export default function ProductPage({ singleProduct }) {
   const [quantity, setQuantity] = useState(1);
@@ -11,7 +12,7 @@ export default function ProductPage({ singleProduct }) {
   const [selectedSize, setSelectedSize] = useState("M");
   const router = useRouter();
 
-  if (!singleProduct) return <div className="p-20 text-center">Loading...</div>;
+  if (!singleProduct) return <Loading></Loading>;
 
   // Notification logic
   const handleAction = (msg) => {

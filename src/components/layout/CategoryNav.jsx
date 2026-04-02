@@ -7,18 +7,18 @@ export default function CategoryNav({ isMobile = false, closeMenu }) {
   const pathname = usePathname();
 
   const categories = [
-    { name: "Electronics", href: "/category/electronics" },
-    { name: "Fashion", href: "/category/fashion" },
-    { name: "Grocery", href: "/category/grocery" },
-    { name: "Home & Living", href: "/category/home" },
-    { name: "Beauty", href: "/category/beauty" },
-    { name: "Health", href: "/category/health" },
-    { name: "Sports", href: "/category/sports" },
-    { name: "Automotive", href: "/category/automotive" },
-    { name: "Books", href: "/category/books" },
-    { name: "Toys", href: "/category/toys" },
-    { name: "Gadgets", href: "/category/gadgets" },
-    { name: "Furniture", href: "/category/furniture" },
+    { name: "Electronics", href: "/categories/electronics" },
+    { name: "Fashion", href: "/categories/fashion" },
+    { name: "Grocery", href: "/categories/grocery" },
+    { name: "Home & Living", href: "/categories/home-living" },
+    { name: "Beauty", href: "/categories/beauty" },
+    { name: "Health", href: "/categories/health" },
+    { name: "Sports", href: "/categories/sports" },
+    { name: "Automotive", href: "/categories/automotive" },
+    { name: "Books", href: "/categories/books" },
+    { name: "Toys", href: "/categories/toys" },
+    { name: "Gadgets", href: "/categories/gadgets" },
+    { name: "Furniture", href: "/categories/furniture" },
   ];
 
   // ---------- MOBILE ----------

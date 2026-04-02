@@ -84,10 +84,10 @@ export default function FeatureProducts() {
       {/* --- Centered View All Action --- */}
    <div className="flex justify-center pt-8">
   <Link
-    href="/shop"
+    href="/allProducts"
     className="group relative inline-flex items-center gap-4 px-12 py-5 rounded-2xl bg-[var(--secondary)] text-white font-black text-xs uppercase tracking-widest hover:scale-[1.05] transition-all shadow-xl shadow-[var(--secondary)]/25 active:scale-95"
   >
-    <span>Explore Full Collection</span>
+    <span>Show All Products</span>
     {/* Animated Decorative Line */}
     <div className="w-6 h-px bg-white opacity-40 group-hover:w-10 transition-all duration-300" />
     <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-300" />
