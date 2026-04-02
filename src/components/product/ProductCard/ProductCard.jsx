@@ -1,111 +1,160 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { Heart, Eye, RefreshCw, ShoppingCart, Star } from "lucide-react";
+import { Heart, Star, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast"; // Ensure this is installed and toaster is in layout
 
+/**
+ * Standard Utility for merging Tailwind classes
+ */
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
 const ProductCard = ({ product }) => {
   if (!product) return null;
-  const router = useRouter()
+  const router = useRouter();
 
-  console.log(product)
+  // Wishlist toggle state
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   const {
     name = "No Name",
-    slug = "#",
     _id,
     category = {},
     pricing = { basePrice: 0, oldPrice: 0 },
     images = {},
     rating = { average: 0, totalReviews: 0 },
     discount = { value: 0 },
-    inventory = { totalStock: 0, stockStatus: "" }
   } = product;
 
- 
+  /**
+   * Navigate to product details page
+   */
+  const handleCardClick = () => {
+    router.push(`/productDetails/${_id}`);
+  };
+
+  /**
+   * Wishlist toggle with toast
+   */
+  const handleWishlistClick = (e) => {
+    e.stopPropagation(); // Card click stop korbe
+    const nextState = !isWishlisted;
+    setIsWishlisted(nextState);
+    
+    if (nextState) {
+      toast.success("Added to Wishlist! ❤️");
+    } else {
+      toast("Removed from Wishlist", { icon: "🗑️" });
+    }
+  };
+
+  /**
+   * Cart notification toast
+   */
+  const handleCartClick = (e) => {
+    e.stopPropagation(); // Card click stop korbe
+    toast.success("Added to Cart successfully! 🛒");
+    console.log("Cart added for:", _id);
+  };
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="group relative bg-(--surface) rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
-   
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      onClick={handleCardClick}
+      className="group relative bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg cursor-pointer w-full"
     >
-      {discount?.value > 0 && (
-        <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded">
-          -{discount.value}%
-        </div>
-      )}
-
-      <div className="relative aspect-square overflow-hidden bg-(--background) shrink-0">
+      {/* 1. Image Section */}
+      <div className="relative aspect-square w-full bg-[var(--background)] overflow-hidden shrink-0 border-b border-[var(--border)]">
         <Image
           src={images?.thumbnail || "/placeholder.jpg"}
           alt={name}
           fill
-          className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 mix-blend-multiply dark:mix-blend-normal"
         />
         
-        <div className="absolute bottom-2 sm:-bottom-12.5 sm:group-hover:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-2 transition-all duration-300 px-1">
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-(--secondary) hover:text-white transition-colors">
-            <Heart className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
-          </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-(--secondary) hover:text-white transition-colors">
-            <Eye className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
-          </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-(--secondary) hover:text-white transition-colors">
-            <RefreshCw className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
-          </button>
-          <button className="p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-(--secondary) hover:text-white transition-colors">
-            <ShoppingCart className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
-          </button>
-        </div>
+        {/* Discount Tag */}
+        {discount?.value > 0 && (
+          <div className="absolute top-0 left-0 bg-rose-500 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-br-xl z-10 shadow-sm">
+            {discount.value}% OFF
+          </div>
+        )}
+
+        {/* Wishlist Button */}
+        <button 
+          onClick={handleWishlistClick}
+          className={cn(
+            "absolute top-2 right-2 p-1.5 bg-[var(--surface)]/80 dark:bg-black/40 backdrop-blur-md rounded-full transition-colors z-10 border border-[var(--border)] shadow-sm",
+            isWishlisted ? "text-rose-500" : "text-[var(--text-secondary)] hover:text-rose-500"
+          )}
+        >
+          <Heart 
+            size={16} 
+            className="sm:w-5 sm:h-5" 
+            fill={isWishlisted ? "currentColor" : "none"} 
+          />
+        </button>
       </div>
 
+      {/* 2. Info Section */}
       <div className="p-3 sm:p-4 flex flex-col grow">
-        <p className="text-[10px] sm:text-xs text-(--text-primary) mb-1 uppercase tracking-wider">{category?.name || "Uncategorized"}</p>
-        <Link href={`/productDetails/${_id}`} className="grow">
-          <h3 className="text-(--primary) font-medium text-xs sm:text-sm lg:text-base line-clamp-2 hover:text-(--secondary) transition-colors leading-tight">
-            {name}
-          </h3>
-        </Link>
+        <span className="text-[9px] sm:text-[10px] font-medium text-[var(--secondary)] uppercase tracking-tight mb-1 opacity-80">
+          {category?.name || "General"}
+        </span>
 
-        <div className="flex items-center gap-0.5 sm:gap-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                "fill-current w-3 h-3 sm:w-3.5 sm:h-3.5",
-                i < Math.floor(rating?.average || 0) ? "text-orange-400" : "text-gray-300"
-              )}
-            />
-          ))}
-          <span className="text-[10px] sm:text-xs text-gray-400 ml-1">({rating?.totalReviews || 0})</span>
-        </div>
+        <h3 className="text-[var(--text-primary)] font-semibold text-xs sm:text-sm lg:text-base line-clamp-2 leading-tight group-hover:text-[var(--secondary)] transition-colors grow">
+          {name}
+        </h3>
 
-        <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-1.5 sm:gap-3">
-          <span className="text-sm sm:text-base lg:text-lg font-bold text-(--primary)">
-            ${pricing?.basePrice || "0.00"}
+        {/* 3. Rating Section */}
+        <div className="flex items-center gap-1 mt-1.5">
+          <div className="flex">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={14}
+                className={cn(
+                  "sm:w-3.5 sm:h-3.5 transition-colors",
+                  i < Math.floor(rating?.average || 0) 
+                    ? "fill-amber-400 text-amber-400" 
+                    : "fill-slate-200 text-slate-200 dark:fill-slate-200 dark:text-slate-700"
+                )}
+              />
+            ))}
+          </div>
+          <span className="text-[10px] sm:text-xs text-slate-400 font-medium opacity-70">
+            ({rating?.totalReviews || 0})
           </span>
-          {pricing?.oldPrice > pricing?.basePrice && (
-            <span className="text-[10px] sm:text-sm text-gray-400 line-through">
-              ${pricing?.oldPrice}
-            </span>
-          )}
         </div>
 
-        {inventory?.stockStatus === "low-stock" && (
-          <p className="text-[9px] sm:text-[10px] text-red-500 mt-1.5 font-semibold uppercase">
-            Only {inventory.totalStock} left!
-          </p>
-        )}
+        {/* 4. Pricing and Cart CTA */}
+        <div className="mt-3 flex items-center justify-between gap-2">
+          <div className="flex flex-col">
+            <span className="text-sm sm:text-lg font-bold text-[var(--text-primary)] leading-none tracking-tight">
+              ${pricing?.basePrice}
+            </span>
+            {pricing?.oldPrice > pricing?.basePrice && (
+              <span className="text-[10px] sm:text-xs text-[var(--text-secondary)] line-through mt-0.5 opacity-50">
+                ${pricing?.oldPrice}
+              </span>
+            )}
+          </div>
+
+          {/* Cart Button */}
+          <button 
+            onClick={handleCartClick}
+            className="h-8 w-8 sm:h-9 sm:w-9 bg-[var(--secondary)] text-white flex items-center justify-center rounded-xl hover:scale-105 active:scale-95 transition-all shadow-md shadow-[var(--secondary)]/20"
+          >
+            <ShoppingCart size={16} className="sm:w-4 sm:h-4" />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
