@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { MapPin, Star, Flame, Minus, Plus, Heart, Truck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from 'react-hot-toast'; // Toast import
+import { useRouter } from "next/navigation";
 
 export default function ProductPage({ singleProduct }) {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("product details");
   const [selectedSize, setSelectedSize] = useState("M");
+  const router = useRouter();
 
   if (!singleProduct) return <div className="p-20 text-center">Loading...</div>;
 
@@ -187,25 +189,35 @@ export default function ProductPage({ singleProduct }) {
             </div>
           </div>
 
-          {/* Buttons: Your Design Intact */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <motion.button 
-              onClick={() => handleAction("Added to cart successfully!")}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="h-14 bg-transparent border-2 border-secondary text-text-primary font-bold rounded-2xl hover:bg-secondary hover:text-white transition-all duration-300 uppercase tracking-widest text-[11px]"
-            >
-              Add to Cart
-            </motion.button>
-            <motion.button
-              onClick={() => handleAction("Proceeding to checkout...")}
-              whileHover={{ scale: 1.02, y: -3 }}
-              whileTap={{ scale: 0.98 }}
-              className="h-14 bg-secondary text-white font-bold rounded-2xl shadow-lg shadow-secondary/30 hover:shadow-secondary/50 transition-all duration-300 uppercase tracking-widest text-[11px]"
-            >
-              Buy It Now
-            </motion.button>
-          </div>
+      {/* Buttons: Updated with Routing */}
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+  <motion.button 
+    onClick={() => toast.success("Added to cart successfully! 🛒")}
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className="h-14 bg-transparent border-2 border-secondary text-text-primary font-bold rounded-2xl hover:bg-secondary hover:text-white transition-all duration-300 uppercase tracking-widest text-[11px]"
+  >
+    Add to Cart
+  </motion.button>
+  
+<motion.button
+  onClick={() => {
+    // ইমেজ এবং প্রাইস এনকোড করে ইউআরএল এ পাঠিয়ে দিচ্ছি
+    const query = new URLSearchParams({
+      name: singleProduct.name,
+      price: singleProduct.pricing.basePrice,
+      image: singleProduct.images.thumbnail
+    }).toString();
+    
+    router.push(`/checkout?${query}`);
+  }}
+  whileHover={{ scale: 1.02, y: -3 }}
+  whileTap={{ scale: 0.98 }}
+  className="h-14 bg-secondary text-white font-bold rounded-2xl shadow-lg shadow-secondary/30 hover:shadow-secondary/50 transition-all duration-300 uppercase tracking-widest text-[11px]"
+>
+  Buy It Now
+</motion.button>
+</div>
 
           <div className="flex justify-between items-center px-2">
             <div className="group flex items-center gap-2 text-text-secondary cursor-pointer hover:text-secondary transition-colors">
