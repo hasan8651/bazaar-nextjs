@@ -3,6 +3,7 @@ import "./globals.css";
 import AuthProvider from "@/provider/AuthProvider";
 import LayoutWrapper from "@/components/layout/LayoutWrapper/LayoutWrapper";
 import ChatBot from "@/components/common/ChatBot";
+// import { CartProvider } from "@/lib/CartContext";
 
 
 
@@ -34,11 +35,13 @@ export default function RootLayout({ children }) {
       >
         <AuthProvider>
           
-          <LayoutWrapper>
+          {/* <CartProvider> */}
+            <LayoutWrapper>
             <main>{children}
               <ChatBot/>
             </main>
           </LayoutWrapper>
+          {/* </CartProvider> */}
          
         </AuthProvider>
       </body>
